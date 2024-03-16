@@ -69,7 +69,7 @@ class HomeScreenActivity : AppCompatActivity() {
                             // 즐겨찾기 한 동화 출력 끝   //
                         }
                         HOME_SCREEN_RESPONSE_STATE.FAIL -> {
-                            Log.d(Constants.TAG, "불러오기 실패")
+                            Log.d(Constants.TAG, "불러오기 실패");
                         }
                     }
                 }
