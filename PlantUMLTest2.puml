@@ -1,0 +1,566 @@
+@startuml
+class com.example.sharedtalewithttsapp.model.httpmodel.AddChildRequestModel {
++ <<Create>> AddChildRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.AddChildResponseModel {
++ <<Create>> AddChildResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.IdCheckModel {
++ <<Create>> IdCheckModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.IdCheckState {
++ <<Create>> IdCheckState(,)
+}
+
+class com.example.sharedtalewithttsapp.ReadingTaleActivity {
++ ActivityReadingTaleBinding binding
++ void onCreate(Bundle?)
++ void onBackPressed()
+}
+
+
+class com.example.sharedtalewithttsapp.retrofit.RetrofitManager$Companion {
++  instance
+}
+
+class com.example.sharedtalewithttsapp.retrofit.RetrofitManager {
+- IRetrofit? iRetrofit
++ void idCheck(IdCheckModel,(HTTP_RESPONSE_STATE, IdCheckState?) -> Unit)
++ void nicknameCheck(NicknameCheckModel,(HTTP_RESPONSE_STATE, NicknameCheckState?) -> Unit)
++ void memberJoin(MemberJoinModel,(HTTP_RESPONSE_STATE, MemberJoinState?) -> Unit)
++ void memberLogin(LoginRequestModel,(HTTP_RESPONSE_STATE, LoginResponseModel?) -> Unit)
++ void readingTale(TestReadingTaleRequestModel,(HTTP_RESPONSE_STATE, TestReadingTaleResponseModel?) -> Unit)
++ void addChild(AddChildRequestModel,(HTTP_RESPONSE_STATE, AddChildResponseModel?) -> Unit)
++ void childProfileList(ChildProfileRequestModel,(HTTP_RESPONSE_STATE, ChildProfileResponseModel?) -> Unit)
++ void search(SearchRequestModel,(HTTP_RESPONSE_STATE, SearchResponseModel?) -> Unit)
++ void writeComment(WriteCommentRequestModel,(HTTP_RESPONSE_STATE, WriteCommentResponseModel?) -> Unit)
++ void addTaleLike(TaleLikeRequestModel,(HTTP_RESPONSE_STATE, TaleLikeResponseModel?) -> Unit)
++ void commentList(CommentListRequestModel,(HTTP_RESPONSE_STATE, CommentListResponseModel?) -> Unit)
++ void favorites(FavoritesRequestModel,(HTTP_RESPONSE_STATE, FavoritesResponseModel?) -> Unit)
++ void homeScreen(HomeScreenRequestModel,(HTTP_RESPONSE_STATE, HomeScreenResponseModel?) -> Unit)
++ void rate(RateRequestModel,(HTTP_RESPONSE_STATE, RateResponseModel?) -> Unit)
++ void stateCheck(StateCheckRequestModel,(HTTP_RESPONSE_STATE, StateCheckResponseModel?) -> Unit)
+}
+
+
+class com.example.sharedtalewithttsapp.AddChildActivity {
++ ActivityAddChildBinding binding
++ void onCreate(Bundle?)
+}
+
+
+interface com.example.sharedtalewithttsapp.retrofit.IRetrofit {
++ void idCheck(void)
++ void nicknameCheck(void)
++ void memberJoin(void)
++ void memberLogin(void)
++ void readingTale(void)
++ void addChild(void)
++ void childProfileList(void)
++ void search(void)
++ void writeComment(void)
++ void addTaleLike(void)
++ void commentList(void)
++ void favorites(void)
++ void homeScreen(void)
++ void rate(void)
++ void stateCheck(void)
+}
+
+class com.example.sharedtalewithttsapp.HomeScreenActivity {
++ ActivityHomeScreenBinding binding
++ void onCreate(Bundle?)
++ void onStart()
++ void onResume()
++ void onPause()
++ void onStop()
++ void onDestroy()
+}
+
+
+class com.example.sharedtalewithttsapp.sharedpreferences.SharedManager {
+- SharedPreferences prefs
++ <<Create>> SharedManager(Context)
++ void saveLoginSave(LoginSaveSharedPreferencesModel)
++ LoginSaveSharedPreferencesModel getLoginSave()
+}
+
+
+class com.example.sharedtalewithttsapp.utils.Constants {
++ String TAG
+}
+
+enum com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE {
+}
+class com.example.sharedtalewithttsapp.utils.IDCHECK_STATE {
++ String ID_AVAILABLE
++ String ID_DUPLICATE
+}
+
+class com.example.sharedtalewithttsapp.utils.NICKNAMECHECK_STATE {
++ String NICKNAME_AVAILABLE
++ String NICKNAME_DUPLICATE
+}
+
+class com.example.sharedtalewithttsapp.utils.MEMBERJOIN_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.LOGIN_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.READING_TALE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.ADD_CHILD_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.CHILD_PROFILE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.SEARCH_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.WRITE_COMMENT_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.TALE_LIKE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.COMMENT_LIST_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.FAVORITES_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.HOME_SCREEN_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.RATE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.STATE_CHECK_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class com.example.sharedtalewithttsapp.utils.API {
++ String BASE_URL
++ String ID_CHECK
++ String NICKNAME_CHECK
++ String MEMBERJOIN
++ String LOGIN
++ String READING_TALE
++ String AUDIO_REQUEST
++ String CHILD_PROFILE_REQUEST
++ String ADD_CHILD
++ String SEARCH
++ String WRITE_COMMENT
++ String ADD_TALE_LIKE
++ String COMMENT_LIST_REQUEST
++ String FAVORITES_REQUEST
++ String RATE_REQUEST
++ String HOME_SCREEN_REQUEST
++ String STATE_CHECK
+}
+
+class com.example.sharedtalewithttsapp.viewholder.SearchResultViewHolder {
++ <<Create>> SearchResultViewHolder(SearchResultRecyclerViewBinding)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.SearchResultAdapter {
++ <<Create>> SearchResultAdapter(SearchResponseModel,(String) -> Unit)
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.CommentListRequestModel {
++ <<Create>> CommentListRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.CommentListResponseModel {
++ <<Create>> CommentListResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.sharedpreferences.PreferenceHelper {
++ SharedPreferences defaultPrefs(Context)
+- void edit((SharedPreferences.Editor) -> Unit)
++ void set(String,Any?)
++ T get(String,T?)
+}
+
+class com.example.sharedtalewithttsapp.SelectChildProfileActivity {
++ ActivitySelectChildProfileBinding binding
++ void onCreate(Bundle?)
++ void onDestroy()
+}
+
+
+class com.example.sharedtalewithttsapp.model.TaleModel {
++ <<Create>> TaleModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.CREATOR {
++ TaleModel createFromParcel(Parcel)
++ Array<TaleModel?> newArray(Int)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.FavoritesRequestModel {
++ <<Create>> FavoritesRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.FavoritesResponseModel {
++ <<Create>> FavoritesResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.ChildProfileViewHolder {
++ <<Create>> ChildProfileViewHolder(ChildProfileRecyclerViewBinding)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.ChildProfileAdapter {
++ <<Create>> ChildProfileAdapter(ChildProfileResponseModel,() -> Unit)
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class com.example.sharedtalewithttsapp.MainActivity {
++ ActivityMainBinding binding
+- SharedManager sharedManager
++ void onCreate(Bundle?)
++ void onStart()
++ void onPause()
++ void onStop()
++ void onDestroy()
+}
+
+
+class com.example.sharedtalewithttsapp.retrofit.RetrofitClient {
+- Retrofit? retrofitClient
++ Retrofit? getClient(String)
+}
+
+
+class com.example.sharedtalewithttsapp.alertdialog.AlertDialogManager$Companion {
++  instance
+}
+
+class com.example.sharedtalewithttsapp.alertdialog.AlertDialogManager {
++ void simpleAlertDialog(String,Context,DialogInterface.OnClickListener?)
++ void ynAlertDialog(String,Context,DialogInterface.OnClickListener)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.SearchRequestModel {
++ <<Create>> SearchRequestModel(,String,String?)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.SearchResponseModel {
++ <<Create>> SearchResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.CREATOR {
++ SearchResponseModel createFromParcel(Parcel)
++ Array<SearchResponseModel?> newArray(Int)
+}
+
+class com.example.sharedtalewithttsapp.MemberJoinActivity {
++ ActivityMemberJoinBinding binding
+-  idFlag
+-  passwordFlag
+-  passwordCheckFlag
+-  nicknameFlag
+-  emailFlag
+-  mobileFlag
++ Boolean id_check_state
++ Boolean nickname_state
++ Boolean passwd_state
+-  idListener
+-  passwordListener
+-  passwordCheckListener
+-  nicknameListener
+-  emailListener
+-  mobileListener
++ Pattern email_pattern
++ Pattern mobile_pattern
+- Boolean hasAlphabet(String)
++ Boolean idRegex(String)
++ Boolean passwordRegex(String)
++ Boolean nicknameRegex(String)
++ Boolean emailRegex(String)
++ Boolean mobileRegex(String)
++ void flagCheck()
++ void onCreate(Bundle?)
+}
+
+
+class com.example.sharedtalewithttsapp.appdata.AppData$Companion {
++  instance
+}
+
+class com.example.sharedtalewithttsapp.appdata.AppData {
+- String userId
+- String childId
++ String getUserId()
++ void setUserId(String)
++ String getChildId()
++ void setChildId(String)
+}
+
+
+class com.example.sharedtalewithttsapp.viewholder.TaleListViewHolder {
++ <<Create>> TaleListViewHolder(TaleListRecyclerViewBinding)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.TaleListAdapter {
++ <<Create>> TaleListAdapter(MutableList<TaleModel>,(String) -> Unit,Context)
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.ReadingTaleViewHolder {
++ <<Create>> ReadingTaleViewHolder(ReadingTaleTextRecyclerViewBinding,ActivityReadingTaleBinding)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.ReadingTaleAdapter {
++ <<Create>> ReadingTaleAdapter(TestReadingTaleResponseModel)
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class com.example.sharedtalewithttsapp.TaleProfileActivity {
++ ActivityTaleProfileBinding binding
++ void onCreate(Bundle?)
+}
+
+
+class com.example.sharedtalewithttsapp.model.httpmodel.TaleLikeRequestModel {
++ <<Create>> TaleLikeRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.TaleLikeResponseModel {
++ <<Create>> TaleLikeResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentRequestModel {
++ <<Create>> WriteCommentRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentResponseModel {
++ <<Create>> WriteCommentResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.media.MediaPlayerManager$Companion {
++  instance
+}
+
+class com.example.sharedtalewithttsapp.media.MediaPlayerManager {
+- ActivityReadingTaleBinding binding
+- MediaPlayer mediaPlayer
+-  handler
+- String? currentTaleId
+-  currentTTSIndex
+-  currentPosition
+-  currentRunnable
+-  pauseState
+-  ttsSpeedList
+-  currentTTSSpeed
+-  currentVoice
++ void initialize(ActivityReadingTaleBinding)
++ void ttsRequest(String)
++ void mediaPlayerRelease()
++ String? getTaleId()
++ void setTaleId(String?)
++ Int getTTSIndex()
++ void setTTSIndex(Int)
++ void doPlusIndex()
++ void setCurrentPosition(Int)
++ Boolean getPauseState()
++ List<String> getTTSSpeedList()
++ void setCurrentTTSSpeed(String)
++ String getCurrentTTSSpeed()
++ String getCurrentVoice()
++ void setCurrentVoice(String)
++ void allTextWhite(TestReadingTaleResponseModel)
++ void ttsReadingSetBackgroundColor(Int,Int)
++ void ttsAudioStart(TestReadingTaleResponseModel,Int)
++ Runnable nextAudioHandler(TestReadingTaleResponseModel,Int)
++ void ttsAudioPause(Int)
+}
+
+
+class com.example.sharedtalewithttsapp.viewholder.CommentViewHolder {
++ <<Create>> CommentViewHolder(CommentRecyclerViewBinding)
+}
+
+class com.example.sharedtalewithttsapp.viewholder.CommentAdapter {
+-  commentListSave
++ <<Create>> CommentAdapter(CommentListResponseModel,(String, Int ,Boolean) -> Unit)
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+
+class com.example.sharedtalewithttsapp.EditCommentActivity {
++ ActivityEditCommentBinding binding
++ void onCreate(Bundle?)
+}
+
+
+class com.example.sharedtalewithttsapp.model.CommentModel {
++ <<Create>> CommentModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.LoginRequestModel {
++ <<Create>> LoginRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.LoginResponseModel {
++ <<Create>> LoginResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.TTSSettingModel {
++ <<Create>> TTSSettingModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinModel {
++ <<Create>> MemberJoinModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinState {
++ <<Create>> MemberJoinState(,)
+}
+
+class com.example.sharedtalewithttsapp.model.MemberSettingModel {
++ <<Create>> MemberSettingModel(,String,,String)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel {
++ <<Create>> HomeScreenRequestModel(,String,,String)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel {
++ <<Create>> HomeScreenResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.SearchActivity {
++ ActivitySearchBinding binding
++ void onCreate(Bundle?)
+- void initSearchView(SearchActivity)
+}
+
+
+class com.example.sharedtalewithttsapp.model.httpmodel.StateCheckRequestModel {
++ <<Create>> StateCheckRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.StateCheckResponseModel {
++ <<Create>> StateCheckResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.sharedpreferences.LoginSaveSharedPreferencesModel {
++ <<Create>> LoginSaveSharedPreferencesModel(,String?,,String?,,Boolean)
+}
+
+class com.example.sharedtalewithttsapp.glide.GlideManager$Companion {
++  instance
+}
+
+class com.example.sharedtalewithttsapp.glide.GlideManager {
++ void serverImageRequest(Context,String,Int,Int,ImageView)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.ChildProfileRequestModel {
++ <<Create>> ChildProfileRequestModel(,String)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.ChildProfileResponseModel {
++ <<Create>> ChildProfileResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.TestReadingTaleRequestModel {
++ <<Create>> TestReadingTaleRequestModel(,String,,String,,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.TestReadingTaleResponseModel {
++ <<Create>> TestReadingTaleResponseModel(,String,,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.RateRequestModel {
++ <<Create>> RateRequestModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.RateResponseModel {
++ <<Create>> RateResponseModel(,)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckModel {
++ <<Create>> NicknameCheckModel(,String)
+}
+
+class com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckState {
++ <<Create>> NicknameCheckState(,)
+}
+
+class com.example.sharedtalewithttsapp.model.ChildInfoModel {
++ <<Create>> ChildInfoModel(,)
+}
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.ReadingTaleActivity
+com.example.sharedtalewithttsapp.retrofit.RetrofitManager +.. com.example.sharedtalewithttsapp.retrofit.RetrofitManager$Companion
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.AddChildActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.HomeScreenActivity
+com.example.sharedtalewithttsapp.viewholder.ViewHolder <|-- com.example.sharedtalewithttsapp.viewholder.SearchResultViewHolder
+com.example.sharedtalewithttsapp.viewholder.Adapter <|-- com.example.sharedtalewithttsapp.viewholder.SearchResultAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.SelectChildProfileActivity
+com.example.sharedtalewithttsapp.model.Creator <|.. com.example.sharedtalewithttsapp.model.CREATOR
+com.example.sharedtalewithttsapp.viewholder.ViewHolder <|-- com.example.sharedtalewithttsapp.viewholder.ChildProfileViewHolder
+com.example.sharedtalewithttsapp.viewholder.Adapter <|-- com.example.sharedtalewithttsapp.viewholder.ChildProfileAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.MainActivity
+com.example.sharedtalewithttsapp.alertdialog.AlertDialogManager +.. com.example.sharedtalewithttsapp.alertdialog.AlertDialogManager$Companion
+com.example.sharedtalewithttsapp.model.httpmodel.Creator <|.. com.example.sharedtalewithttsapp.model.httpmodel.CREATOR
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.MemberJoinActivity
+com.example.sharedtalewithttsapp.appdata.AppData +.. com.example.sharedtalewithttsapp.appdata.AppData$Companion
+com.example.sharedtalewithttsapp.viewholder.ViewHolder <|-- com.example.sharedtalewithttsapp.viewholder.TaleListViewHolder
+com.example.sharedtalewithttsapp.viewholder.Adapter <|-- com.example.sharedtalewithttsapp.viewholder.TaleListAdapter
+com.example.sharedtalewithttsapp.viewholder.ViewHolder <|-- com.example.sharedtalewithttsapp.viewholder.ReadingTaleViewHolder
+com.example.sharedtalewithttsapp.viewholder.Adapter <|-- com.example.sharedtalewithttsapp.viewholder.ReadingTaleAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.TaleProfileActivity
+com.example.sharedtalewithttsapp.media.MediaPlayerManager +.. com.example.sharedtalewithttsapp.media.MediaPlayerManager$Companion
+com.example.sharedtalewithttsapp.viewholder.ViewHolder <|-- com.example.sharedtalewithttsapp.viewholder.CommentViewHolder
+com.example.sharedtalewithttsapp.viewholder.Adapter <|-- com.example.sharedtalewithttsapp.viewholder.CommentAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.EditCommentActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.sharedtalewithttsapp.SearchActivity
+com.example.sharedtalewithttsapp.glide.GlideManager +.. com.example.sharedtalewithttsapp.glide.GlideManager$Companion
+@enduml

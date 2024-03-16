@@ -1,0 +1,478 @@
+@startuml
+class AddChildRequestModel {
+}
+class AddChildResponseModel {
+}
+class IdCheckModel {
+}
+class IdCheckState {
+}
+class ReadingTaleActivity {
++ ActivityReadingTaleBinding binding
++ void onCreate(Bundle?)
++ void onBackPressed()
+}
+
+
+class RetrofitManager$Companion {
++  instance
+}
+
+class RetrofitManager {
+- IRetrofit? iRetrofit
++ void idCheck(IdCheckModel,(HTTP_RESPONSE_STATE, IdCheckState?) -> Unit)
++ void nicknameCheck(NicknameCheckModel,(HTTP_RESPONSE_STATE, NicknameCheckState?) -> Unit)
++ void memberJoin(MemberJoinModel,(HTTP_RESPONSE_STATE, MemberJoinState?) -> Unit)
++ void memberLogin(LoginRequestModel,(HTTP_RESPONSE_STATE, LoginResponseModel?) -> Unit)
++ void readingTale(TestReadingTaleRequestModel,(HTTP_RESPONSE_STATE, TestReadingTaleResponseModel?) -> Unit)
++ void addChild(AddChildRequestModel,(HTTP_RESPONSE_STATE, AddChildResponseModel?) -> Unit)
++ void childProfileList(ChildProfileRequestModel,(HTTP_RESPONSE_STATE, ChildProfileResponseModel?) -> Unit)
++ void search(SearchRequestModel,(HTTP_RESPONSE_STATE, SearchResponseModel?) -> Unit)
++ void writeComment(WriteCommentRequestModel,(HTTP_RESPONSE_STATE, WriteCommentResponseModel?) -> Unit)
++ void addTaleLike(TaleLikeRequestModel,(HTTP_RESPONSE_STATE, TaleLikeResponseModel?) -> Unit)
++ void commentList(CommentListRequestModel,(HTTP_RESPONSE_STATE, CommentListResponseModel?) -> Unit)
++ void favorites(FavoritesRequestModel,(HTTP_RESPONSE_STATE, FavoritesResponseModel?) -> Unit)
++ void homeScreen(HomeScreenRequestModel,(HTTP_RESPONSE_STATE, HomeScreenResponseModel?) -> Unit)
++ void rate(RateRequestModel,(HTTP_RESPONSE_STATE, RateResponseModel?) -> Unit)
++ void stateCheck(StateCheckRequestModel,(HTTP_RESPONSE_STATE, StateCheckResponseModel?) -> Unit)
+}
+
+
+class AddChildActivity {
++ ActivityAddChildBinding binding
++ void onCreate(Bundle?)
+}
+
+
+interface IRetrofit {
++ void idCheck(void)
++ void nicknameCheck(void)
++ void memberJoin(void)
++ void memberLogin(void)
++ void readingTale(void)
++ void addChild(void)
++ void childProfileList(void)
++ void search(void)
++ void writeComment(void)
++ void addTaleLike(void)
++ void commentList(void)
++ void favorites(void)
++ void homeScreen(void)
++ void rate(void)
++ void stateCheck(void)
+}
+
+class HomeScreenActivity {
++ ActivityHomeScreenBinding binding
++ void onCreate(Bundle?)
++ void onStart()
++ void onResume()
++ void onPause()
++ void onStop()
++ void onDestroy()
+}
+
+
+class SharedManager {
+- SharedPreferences prefs
++ void saveLoginSave(LoginSaveSharedPreferencesModel)
++ LoginSaveSharedPreferencesModel getLoginSave()
+}
+
+
+class Constants {
++ String TAG
+}
+
+enum HTTP_RESPONSE_STATE {
+}
+class IDCHECK_STATE {
++ String ID_AVAILABLE
++ String ID_DUPLICATE
+}
+
+class NICKNAMECHECK_STATE {
++ String NICKNAME_AVAILABLE
++ String NICKNAME_DUPLICATE
+}
+
+class MEMBERJOIN_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class LOGIN_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class READING_TALE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class ADD_CHILD_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class CHILD_PROFILE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class SEARCH_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class WRITE_COMMENT_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class TALE_LIKE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class COMMENT_LIST_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class FAVORITES_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class HOME_SCREEN_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class RATE_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class STATE_CHECK_RESPONSE_STATE {
++ String SUCCESS
++ String FAIL
+}
+
+class API {
++ String BASE_URL
++ String ID_CHECK
++ String NICKNAME_CHECK
++ String MEMBERJOIN
++ String LOGIN
++ String READING_TALE
++ String AUDIO_REQUEST
++ String CHILD_PROFILE_REQUEST
++ String ADD_CHILD
++ String SEARCH
++ String WRITE_COMMENT
++ String ADD_TALE_LIKE
++ String COMMENT_LIST_REQUEST
++ String FAVORITES_REQUEST
++ String RATE_REQUEST
++ String HOME_SCREEN_REQUEST
++ String STATE_CHECK
+}
+
+class SearchResultViewHolder {
+}
+class SearchResultAdapter {
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class CommentListRequestModel {
+}
+class CommentListResponseModel {
+}
+class PreferenceHelper {
++ SharedPreferences defaultPrefs(Context)
+- void edit((SharedPreferences.Editor) -> Unit)
++ void set(String,Any?)
++ T get(String,T?)
+}
+
+class SelectChildProfileActivity {
++ ActivitySelectChildProfileBinding binding
++ void onCreate(Bundle?)
++ void onDestroy()
+}
+
+
+class TaleModel {
+}
+class CREATOR {
++ TaleModel createFromParcel(Parcel)
++ Array<TaleModel?> newArray(Int)
+}
+
+class FavoritesRequestModel {
+}
+class FavoritesResponseModel {
+}
+class ChildProfileViewHolder {
+}
+class ChildProfileAdapter {
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class MainActivity {
++ ActivityMainBinding binding
+- SharedManager sharedManager
++ void onCreate(Bundle?)
++ void onStart()
++ void onPause()
++ void onStop()
++ void onDestroy()
+}
+
+
+class RetrofitClient {
+- Retrofit? retrofitClient
++ Retrofit? getClient(String)
+}
+
+
+class AlertDialogManager$Companion {
++  instance
+}
+
+class AlertDialogManager {
++ void simpleAlertDialog(String,Context,DialogInterface.OnClickListener?)
++ void ynAlertDialog(String,Context,DialogInterface.OnClickListener)
+}
+
+class SearchRequestModel {
+}
+class SearchResponseModel {
+}
+class CREATOR {
++ SearchResponseModel createFromParcel(Parcel)
++ Array<SearchResponseModel?> newArray(Int)
+}
+
+class MemberJoinActivity {
++ ActivityMemberJoinBinding binding
+-  idFlag
+-  passwordFlag
+-  passwordCheckFlag
+-  nicknameFlag
+-  emailFlag
+-  mobileFlag
++ Boolean id_check_state
++ Boolean nickname_state
++ Boolean passwd_state
+-  idListener
+-  passwordListener
+-  passwordCheckListener
+-  nicknameListener
+-  emailListener
+-  mobileListener
++ Pattern email_pattern
++ Pattern mobile_pattern
+- Boolean hasAlphabet(String)
++ Boolean idRegex(String)
++ Boolean passwordRegex(String)
++ Boolean nicknameRegex(String)
++ Boolean emailRegex(String)
++ Boolean mobileRegex(String)
++ void flagCheck()
++ void onCreate(Bundle?)
+}
+
+
+class AppData$Companion {
++  instance
+}
+
+class AppData {
+- String userId
+- String childId
++ String getUserId()
++ void setUserId(String)
++ String getChildId()
++ void setChildId(String)
+}
+
+
+class TaleListViewHolder {
+}
+class TaleListAdapter {
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class ReadingTaleViewHolder {
+}
+class ReadingTaleAdapter {
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+class TaleProfileActivity {
++ ActivityTaleProfileBinding binding
++ void onCreate(Bundle?)
+}
+
+
+class TaleLikeRequestModel {
+}
+class TaleLikeResponseModel {
+}
+class WriteCommentRequestModel {
+}
+class WriteCommentResponseModel {
+}
+class MediaPlayerManager$Companion {
++  instance
+}
+
+class MediaPlayerManager {
+- ActivityReadingTaleBinding binding
+- MediaPlayer mediaPlayer
+-  handler
+- String? currentTaleId
+-  currentTTSIndex
+-  currentPosition
+-  currentRunnable
+-  pauseState
+-  ttsSpeedList
+-  currentTTSSpeed
+-  currentVoice
++ void initialize(ActivityReadingTaleBinding)
++ void ttsRequest(String)
++ void mediaPlayerRelease()
++ String? getTaleId()
++ void setTaleId(String?)
++ Int getTTSIndex()
++ void setTTSIndex(Int)
++ void doPlusIndex()
++ void setCurrentPosition(Int)
++ Boolean getPauseState()
++ List<String> getTTSSpeedList()
++ void setCurrentTTSSpeed(String)
++ String getCurrentTTSSpeed()
++ String getCurrentVoice()
++ void setCurrentVoice(String)
++ void allTextWhite(TestReadingTaleResponseModel)
++ void ttsReadingSetBackgroundColor(Int,Int)
++ void ttsAudioStart(TestReadingTaleResponseModel,Int)
++ Runnable nextAudioHandler(TestReadingTaleResponseModel,Int)
++ void ttsAudioPause(Int)
+}
+
+
+class CommentViewHolder {
+}
+class CommentAdapter {
+-  commentListSave
++ RecyclerView.ViewHolder onCreateViewHolder(ViewGroup,Int)
++ Int getItemCount()
++ void onBindViewHolder(RecyclerView.ViewHolder,Int)
+}
+
+
+class EditCommentActivity {
++ ActivityEditCommentBinding binding
++ void onCreate(Bundle?)
+}
+
+
+class CommentModel {
+}
+class LoginRequestModel {
+}
+class LoginResponseModel {
+}
+class TTSSettingModel {
+}
+class MemberJoinModel {
+}
+class MemberJoinState {
+}
+class MemberSettingModel {
+}
+class HomeScreenRequestModel {
+}
+class HomeScreenResponseModel {
+}
+class SearchActivity {
++ ActivitySearchBinding binding
++ void onCreate(Bundle?)
+- void initSearchView(SearchActivity)
+}
+
+
+class StateCheckRequestModel {
+}
+class StateCheckResponseModel {
+}
+class LoginSaveSharedPreferencesModel {
+}
+class GlideManager$Companion {
++  instance
+}
+
+class GlideManager {
++ void serverImageRequest(Context,String,Int,Int,ImageView)
+}
+
+class ChildProfileRequestModel {
+}
+class ChildProfileResponseModel {
+}
+class TestReadingTaleRequestModel {
+}
+class TestReadingTaleResponseModel {
+}
+class RateRequestModel {
+}
+class RateResponseModel {
+}
+class NicknameCheckModel {
+}
+class NicknameCheckState {
+}
+class ChildInfoModel {
+}
+
+
+AppCompatActivity <|-- ReadingTaleActivity
+RetrofitManager +.. RetrofitManager$Companion
+AppCompatActivity <|-- AddChildActivity
+AppCompatActivity <|-- HomeScreenActivity
+ViewHolder <|-- SearchResultViewHolder
+Adapter <|-- SearchResultAdapter
+AppCompatActivity <|-- SelectChildProfileActivity
+Creator <|.. CREATOR
+ViewHolder <|-- ChildProfileViewHolder
+Adapter <|-- ChildProfileAdapter
+AppCompatActivity <|-- MainActivity
+AlertDialogManager +.. AlertDialogManager$Companion
+Creator <|.. CREATOR
+AppCompatActivity <|-- MemberJoinActivity
+AppData +.. AppData$Companion
+ViewHolder <|-- TaleListViewHolder
+Adapter <|-- TaleListAdapter
+ViewHolder <|-- ReadingTaleViewHolder
+Adapter <|-- ReadingTaleAdapter
+AppCompatActivity <|-- TaleProfileActivity
+MediaPlayerManager +.. MediaPlayerManager$Companion
+ViewHolder <|-- CommentViewHolder
+Adapter <|-- CommentAdapter
+AppCompatActivity <|-- EditCommentActivity
+AppCompatActivity <|-- SearchActivity
+GlideManager +.. GlideManager$Companion
+@enduml
