@@ -195,7 +195,7 @@ class TaleProfileActivity : AppCompatActivity() {
                 completion = { httpResponseState, rateResponse ->
                     when (httpResponseState) {
                         HTTP_RESPONSE_STATE.OKAY -> {
-                            Log.d(TAG, "평점 갱신 api 호출 성공 : ${rateResponse}")
+                            Log.d(TAG, "평점 갱신 api 호출 성공 : ${rateResponse}");
 
                             when (rateResponse?.state) {
                                 RATE_RESPONSE_STATE.SUCCESS -> {
