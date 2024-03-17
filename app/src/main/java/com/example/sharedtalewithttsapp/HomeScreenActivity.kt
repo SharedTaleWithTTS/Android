@@ -59,7 +59,6 @@ class HomeScreenActivity : AppCompatActivity() {
                                     if(taleId == i.id) {
                                         taleModel = i
                                         intent.putExtra("taleInfo", taleModel)
-                                        intent.putExtra("favoritesState", true)
                                     }
                                 }
                                 startActivity(intent)

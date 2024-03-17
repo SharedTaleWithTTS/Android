@@ -1,22 +1,18 @@
 package com.example.sharedtalewithttsapp
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.sharedtalewithttsapp.alertdialog.AlertDialogManager
 import com.example.sharedtalewithttsapp.appdata.AppData
 import com.example.sharedtalewithttsapp.databinding.ActivityTaleProfileBinding
 import com.example.sharedtalewithttsapp.glide.GlideManager
 import com.example.sharedtalewithttsapp.model.TaleModel
 import com.example.sharedtalewithttsapp.model.httpmodel.FavoritesRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.RateRequestModel
-import com.example.sharedtalewithttsapp.model.httpmodel.SearchResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.StateCheckRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.StateCheckResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.TaleLikeRequestModel
-import com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentRequestModel
 import com.example.sharedtalewithttsapp.retrofit.RetrofitManager
 import com.example.sharedtalewithttsapp.utils.Constants.TAG
 import com.example.sharedtalewithttsapp.utils.FAVORITES_RESPONSE_STATE
@@ -24,8 +20,6 @@ import com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.RATE_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.STATE_CHECK_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.TALE_LIKE_RESPONSE_STATE
-import com.example.sharedtalewithttsapp.utils.WRITE_COMMENT_RESPONSE_STATE
-import kotlin.math.log
 
 class TaleProfileActivity : AppCompatActivity() {
     lateinit var binding : ActivityTaleProfileBinding
@@ -38,13 +32,14 @@ class TaleProfileActivity : AppCompatActivity() {
         title = ""
 
         val taleInfo = intent.getParcelableExtra<TaleModel>("taleInfo") // intent 가져오기
-        var stateCheck : StateCheckResponseModel
+        var stateCheck : StateCheckResponseModel? = null        // 통신으로 받을 모델
         var likeState : Boolean = false
-        Log.d(TAG, "구간 1");
+        var favoritesState : Boolean = false
+
+
         // 상태 체크 위한 통신
-        val stateCheckInfo = StateCheckRequestModel(childId = AppData.instance.getChildId(),
-                                                taleId = taleInfo!!.id)
-        Log.d(TAG, "구간 2");
+        val stateCheckInfo = StateCheckRequestModel(childId = AppData.instance.getChildId(), taleId = taleInfo!!.id)
+        
         RetrofitManager.instance.stateCheck(stateCheckInfo,
             completion = { httpResponseState, stateCheckResponse ->
                 when (httpResponseState) {
@@ -57,9 +52,14 @@ class TaleProfileActivity : AppCompatActivity() {
                                 stateCheck = stateCheckResponse
                                 binding.textMyRating.setText("내 평점 : ${stateCheck!!.rate}")
                                 likeState = stateCheck!!.likeCheck.toBoolean()    // 좋아요 상태 구분
+                                favoritesState = stateCheck!!.favoritesCheck.toBoolean()
                                 if(likeState){
                                     binding.likeBtn.setImageResource(R.drawable.like_activate)
                                 }
+                                if(favoritesState){
+                                    binding.favoritesBtn.setImageResource(R.drawable.favorites_activate)
+                                }
+                                binding.ratingBar.rating = stateCheck!!.rate.toFloat()
                             }
                             STATE_CHECK_RESPONSE_STATE.FAIL -> {
                                 Log.d(TAG, "상태 check 실패")
@@ -73,23 +73,21 @@ class TaleProfileActivity : AppCompatActivity() {
             })
         // 통신 끝
 
-        var favoritesState : Boolean = intent.getBooleanExtra("favoritesState", false)     // 즐찾 상태 구분 // 키 값이 존재하지 않을 경우 : false
-        Log.d(TAG, "구간 3");
+
+
         setSupportActionBar(binding.toolBar)    // 툴바 표시
         supportActionBar?.setDisplayHomeAsUpEnabled(true)                   // 뒤로가기표시
         binding.toolBar.setNavigationOnClickListener { onBackPressed() }    // 뒤로가기 클릭시 뒤로가기
         
-        // 화면 정보 표시
+        // 초기 화면 정보 표시
         binding.textTitle.setText("${taleInfo?.title}")
         binding.textLike.setText("좋아요 : ${taleInfo?.like}")
         binding.textReviews.setText("댓글 수 : ${taleInfo?.reviews}")
         binding.textViews.setText("조회수 : ${taleInfo?.views}")
         binding.textRate.setText("평점 : ${taleInfo?.rate}")
-        Log.d(TAG, "구간 4");
 
-        if(favoritesState){
-            binding.favoritesBtn.setImageResource(R.drawable.favorites_activate)
-        }
+
+
         GlideManager.instance.serverImageRequest(
             this,
             taleInfo!!.taleImage,
@@ -98,7 +96,6 @@ class TaleProfileActivity : AppCompatActivity() {
             binding.imageTale
         )
 
-        Log.d(TAG, "구간 5");
         // 동화 읽기 버튼을 눌렀을 때
         binding.startTaleReadingBtn.setOnClickListener {
             Log.d(TAG, "동화 읽기 버튼 누름");

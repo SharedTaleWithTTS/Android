@@ -86,28 +86,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d(Constants.TAG, "검색 텍스트 변경");
                 Log.d(Constants.TAG, "검색 문자열 : ${newText}");
-                val searchList = SearchRequestModel(type = "title", search = newText)
-                RetrofitManager.instance.search(searchList, completion = {
-                        httpResponseState, searchResponse ->
 
-                    when(httpResponseState){
-                        HTTP_RESPONSE_STATE.OKAY -> {
-
-                            when(searchResponse?.state){
-                                SEARCH_RESPONSE_STATE.SUCCESS -> {
-                                    Log.d(Constants.TAG, "불러오기 성공")
-
-                                }
-                                SEARCH_RESPONSE_STATE.FAIL -> {
-                                    Log.d(Constants.TAG, "불러오기 실패")
-                                }
-                            }
-                        }
-                        HTTP_RESPONSE_STATE.FAIL -> {
-                            Log.d(Constants.TAG, "검색 호출 실패 : ${searchResponse}");
-                        }
-                    }
-                })
                 return true
             }
         })

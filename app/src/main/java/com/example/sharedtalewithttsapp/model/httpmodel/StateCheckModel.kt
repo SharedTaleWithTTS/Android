@@ -15,5 +15,6 @@ data class StateCheckResponseModel(
     @SerializedName("like")
     var likeCheck : String,
     var rate : String,
+    @SerializedName("favorite")
     var favoritesCheck : String
 )
