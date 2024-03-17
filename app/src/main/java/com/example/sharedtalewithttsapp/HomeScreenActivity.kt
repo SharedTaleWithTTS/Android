@@ -74,7 +74,7 @@ class HomeScreenActivity : AppCompatActivity() {
                     }
                 }
                 HTTP_RESPONSE_STATE.FAIL -> {
-                    Log.d(Constants.TAG, "홈 화면 요청 api 실패 : ${homeScreenResponse}")
+                    Log.d(Constants.TAG, "홈 화면 요청 api 실패 : ${homeScreenResponse}");
                 }
             }
         })
