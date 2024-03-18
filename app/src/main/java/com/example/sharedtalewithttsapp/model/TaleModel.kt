@@ -13,7 +13,7 @@ data class TaleModel(
     var taleImage : String,
     @SerializedName("likes")
     var like : String,          // 좋아요
-    var rate : String,
+    var rate : String,          // 평균 평점
     var views : String,     // 조회수
     var reviews : String // 댓글 수
 ) : Parcelable {

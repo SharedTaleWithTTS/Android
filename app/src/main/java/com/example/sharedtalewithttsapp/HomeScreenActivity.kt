@@ -66,7 +66,7 @@ class HomeScreenActivity : AppCompatActivity() {
                             binding.favoriteRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
 
                             // 즐겨찾기 한 동화 출력 끝   //
-/*
+
                             // 여기서부터 최근 본 동화 출력
                             binding.recentlyViewRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
                             binding.recentlyViewRecyclerView.adapter = TaleListAdapter(homeScreenResponse.recentlyView, clickListener = {
@@ -83,7 +83,7 @@ class HomeScreenActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }, this)
                             binding.recentlyViewRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
-*/
+
                             // 최근 본 동화 출력 끝   //
                         }
                         HOME_SCREEN_RESPONSE_STATE.FAIL -> {

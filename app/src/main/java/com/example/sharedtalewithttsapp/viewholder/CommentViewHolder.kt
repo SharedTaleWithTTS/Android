@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharedtalewithttsapp.R
-import com.example.sharedtalewithttsapp.appdata.AppData
 import com.example.sharedtalewithttsapp.databinding.CommentRecyclerViewBinding
-import com.example.sharedtalewithttsapp.databinding.SearchResultRecyclerViewBinding
 import com.example.sharedtalewithttsapp.model.httpmodel.CommentListResponseModel
-import com.example.sharedtalewithttsapp.model.httpmodel.SearchResponseModel
 import com.example.sharedtalewithttsapp.utils.Constants
+import com.google.type.DateTime
 
 class CommentViewHolder(val binding: CommentRecyclerViewBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -39,9 +37,13 @@ class CommentAdapter(private var datas: CommentListResponseModel, private val cl
             "I" -> "내향형"
             else -> ""
         }
+/*
+        val dateStringFromServer = datas.commentList[position].writeDate
 
+        val currentTime = DateTime.now()                // 현재 시간
+*/
         binding.textNickname.setText(datas.commentList[position].nickname)
-        binding.textChildInfo.setText("${datas.commentList[position].childAge} ${tempChildGender} ${tempChildPersonality}")
+        binding.textChildInfo.setText("${datas.commentList[position].childAge}세 ${tempChildGender} ${tempChildPersonality}")
         binding.textDate.setText(datas.commentList[position].writeDate)
         binding.likeNum.setText(datas.commentList[position].like)
         var q : String = ""
