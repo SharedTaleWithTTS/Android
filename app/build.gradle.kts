@@ -70,4 +70,7 @@ dependencies {
     // SharedPreferences
     implementation("androidx.preference:preference-ktx:1.2.1")
 
+    // joda-time
+    implementation("joda-time:joda-time:2.10.13")
+
 }

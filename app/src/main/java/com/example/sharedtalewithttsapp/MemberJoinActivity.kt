@@ -33,16 +33,20 @@ class MemberJoinActivity : AppCompatActivity() {
     private var nicknameFlag = false
     private var emailFlag = false
     private var mobileFlag = false
+
     // 중복 확인 변수
-    var id_check_state : Boolean = false
-    var nickname_state : Boolean = false
-    var passwd_state : Boolean = false
+    var id_check_state: Boolean = false
+    var nickname_state: Boolean = false
+    var passwd_state: Boolean = false
+
     // 리스너 정의
     private val idListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun afterTextChanged(s: Editable?) {
             if (s != null) {
                 when {
@@ -51,11 +55,13 @@ class MemberJoinActivity : AppCompatActivity() {
                         binding.idCheckBtn.isEnabled = false
                         idFlag = false
                     }
+
                     !idRegex(s.toString()) -> {
                         binding.idTextInputLayout.error = "아이디 형식이 맞지 않습니다"
                         binding.idCheckBtn.isEnabled = false
                         idFlag = false
                     }
+
                     else -> {
                         binding.idTextInputLayout.error = null
                         binding.idCheckBtn.isEnabled = true
@@ -70,8 +76,10 @@ class MemberJoinActivity : AppCompatActivity() {
     private val passwordListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun afterTextChanged(s: Editable?) {
             if (s != null) {
                 when {
@@ -81,12 +89,14 @@ class MemberJoinActivity : AppCompatActivity() {
                         passwordFlag = false
                         passwordCheckFlag = false
                     }
+
                     !passwordRegex(s.toString()) -> {
                         binding.passwordTextInputLayout.error = "비밀번호 형식이 일치하지 않습니다."
                         binding.passwordRecheckTextInputLayout.error = "다시 확인해주세요"
                         passwordFlag = false
                         passwordCheckFlag = false
                     }
+
                     else -> {
                         binding.passwordTextInputLayout.error = null
                         binding.passwordRecheckTextInputLayout.error = "다시 확인해주세요"
@@ -112,14 +122,17 @@ class MemberJoinActivity : AppCompatActivity() {
                         binding.passwordRecheckTextInputLayout.error = "비밀번호를 입력해주세요."
                         passwordCheckFlag = false
                     }
+
                     !passwordRegex(s.toString()) -> {
                         binding.passwordRecheckTextInputLayout.error = "비밀번호 형식이 일치하지 않습니다."
                         passwordCheckFlag = false
                     }
+
                     binding.passwordTextInputEditText.text.toString() == binding.passwordRecheckTextInputEditText.text.toString() -> {
                         binding.passwordRecheckTextInputLayout.error = null
                         passwordCheckFlag = true
                     }
+
                     else -> {
                         binding.passwordRecheckTextInputLayout.error = "비밀번호가 일치하지 않습니다"
                         passwordCheckFlag = false
@@ -132,8 +145,10 @@ class MemberJoinActivity : AppCompatActivity() {
     private val nicknameListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun afterTextChanged(s: Editable?) {
             if (s != null) {
                 when {
@@ -142,11 +157,13 @@ class MemberJoinActivity : AppCompatActivity() {
                         binding.nicknameCheckBtn.isEnabled = false
                         nicknameFlag = false
                     }
+
                     !nicknameRegex(s.toString()) -> {
                         binding.nicknameTextviewInputLayout.error = "닉네임 형식이 맞지 않습니다"
                         binding.nicknameCheckBtn.isEnabled = false
                         nicknameFlag = false
                     }
+
                     else -> {
                         binding.nicknameTextviewInputLayout.error = null
                         binding.nicknameCheckBtn.isEnabled = true
@@ -161,8 +178,10 @@ class MemberJoinActivity : AppCompatActivity() {
     private val emailListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun afterTextChanged(s: Editable?) {
             if (s != null) {
                 when {
@@ -170,10 +189,12 @@ class MemberJoinActivity : AppCompatActivity() {
                         binding.emailTextviewInputLayout.error = "이메일를 입력해주세요."
                         emailFlag = false
                     }
+
                     !emailRegex(s.toString()) -> {
                         binding.emailTextviewInputLayout.error = "이메일 형식이 맞지 않습니다"
                         emailFlag = false
                     }
+
                     else -> {
                         binding.emailTextviewInputLayout.error = null
                         emailFlag = true
@@ -186,8 +207,10 @@ class MemberJoinActivity : AppCompatActivity() {
     private val mobileListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
+
         override fun afterTextChanged(s: Editable?) {
             if (s != null) {
                 when {
@@ -195,10 +218,12 @@ class MemberJoinActivity : AppCompatActivity() {
                         binding.mobileTextviewInputLayout.error = "핸드폰 번호를 입력해주세요."
                         mobileFlag = false
                     }
+
                     !mobileRegex(s.toString()) -> {
                         binding.mobileTextviewInputLayout.error = "핸드폰 번호 형식이 맞지 않습니다"
                         mobileFlag = false
                     }
+
                     else -> {
                         binding.mobileTextviewInputLayout.error = null
                         mobileFlag = true
@@ -208,6 +233,7 @@ class MemberJoinActivity : AppCompatActivity() {
             }
         }
     }
+
     // 영문자 존재 여부를 확인하는 메서드
     private fun hasAlphabet(string: String): Boolean {
         for (i in string.indices) {
@@ -227,32 +253,36 @@ class MemberJoinActivity : AppCompatActivity() {
         }
         return false
     }
+
     fun passwordRegex(password: String): Boolean {
         if (password.length >= 5) {
             return true
         }
         return false
     }
+
     fun nicknameRegex(nickname: String): Boolean {
         return true
     }
+
     fun emailRegex(email: String): Boolean {
         return email_pattern.matcher(email).matches()
     }
-    fun mobileRegex(mobile: String): Boolean{
+
+    fun mobileRegex(mobile: String): Boolean {
         return mobile_pattern.matcher(mobile).matches()
     }
 
     // 모든 정규식 일치 시 버튼 활성화
     fun flagCheck() {
-        binding.memberJoinBtn.isEnabled = idFlag && passwordFlag && passwordCheckFlag && nicknameFlag && emailFlag && mobileFlag
+        binding.memberJoinBtn.isEnabled =
+            idFlag && passwordFlag && passwordCheckFlag && nicknameFlag && emailFlag && mobileFlag
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMemberJoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
 
         // TextInputLayout과 TextWatcher 연결
@@ -277,12 +307,14 @@ class MemberJoinActivity : AppCompatActivity() {
             }
         }
         // passwdCheckListener
-        binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(passwordCheckListener)
+        binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
+            passwordCheckListener
+        )
         binding.passwordRecheckTextInputEditText.hint = "다시 입력해 주세요"
         binding.passwordRecheckTextInputEditText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.passwordRecheckTextInputEditText.hint = ""
-                if(binding.passwordTextInputEditText.text.toString() == binding.passwordRecheckTextInputEditText.text.toString()){
+                if (binding.passwordTextInputEditText.text.toString() == binding.passwordRecheckTextInputEditText.text.toString()) {
                     binding.passwordRecheckTextInputLayout.error = null
                 }
             } else {
@@ -325,28 +357,37 @@ class MemberJoinActivity : AppCompatActivity() {
             Log.d(TAG, "MemberJoinActivity - 아이디 중복 확인 버튼 클릭 됨");
 
             val id = IdCheckModel(id = binding.idTextInputEditText.text.toString())
-            RetrofitManager.instance.idCheck(id, completion = {
-                    httpResponseState, idCheckState ->
+            RetrofitManager.instance.idCheck(id, completion = { httpResponseState, idCheckState ->
 
                 // 통신 성공, 실패 여부
-                when(httpResponseState){
+                when (httpResponseState) {
                     HTTP_RESPONSE_STATE.OKAY -> {
                         Log.d(TAG, "아이디 중복 체크 api 호출 성공 : ${idCheckState}")
 
-                        when(idCheckState?.state){
+                        when (idCheckState?.state) {
                             IDCHECK_STATE.ID_AVAILABLE -> {
                                 Log.d(TAG, "아이디 사용가능 여부 : 허용");
                                 id_check_state = true
                                 // 알림창 팝업
-                                AlertDialogManager.instance.simpleAlertDialog("사용 가능한 아이디입니다", this, null)
+                                AlertDialogManager.instance.simpleAlertDialog(
+                                    "사용 가능한 아이디입니다",
+                                    this,
+                                    null
+                                )
                             }
+
                             IDCHECK_STATE.ID_DUPLICATE -> {
                                 Log.d(TAG, "아이디 사용가능 여부 : 중복");
                                 // 알림창 팝업
-                                AlertDialogManager.instance.simpleAlertDialog("사용 불가한 아이디입니다", this, null)
+                                AlertDialogManager.instance.simpleAlertDialog(
+                                    "사용 불가한 아이디입니다",
+                                    this,
+                                    null
+                                )
                             }
                         }
                     }
+
                     HTTP_RESPONSE_STATE.FAIL -> {
                         Log.d(TAG, "아이디 중복 체크 api 호출 실패 : ${idCheckState}")
                         Toast.makeText(this, "네트워크 통신 오류. 다시 시도해주세요...", Toast.LENGTH_SHORT).show()
@@ -358,45 +399,58 @@ class MemberJoinActivity : AppCompatActivity() {
         binding.nicknameCheckBtn.setOnClickListener {
             Log.d(TAG, "MemberJoinActivity - 닉네임 중복 확인 버튼 클릭 됨");
 
-            val nickname = NicknameCheckModel(nickname = binding.nicknameTextviewInputEditText.text.toString())
-            RetrofitManager.instance.nicknameCheck(nickname, completion = {
-                    httpResponseState, nicknameCheckState ->
-                // 통신 성공, 실패 여부
-                when(httpResponseState){
-                    HTTP_RESPONSE_STATE.OKAY -> {
-                        Log.d(TAG, "아이디 중복 체크 api 호출 성공 : ${nicknameCheckState}")
+            val nickname =
+                NicknameCheckModel(nickname = binding.nicknameTextviewInputEditText.text.toString())
+            RetrofitManager.instance.nicknameCheck(
+                nickname,
+                completion = { httpResponseState, nicknameCheckState ->
+                    // 통신 성공, 실패 여부
+                    when (httpResponseState) {
+                        HTTP_RESPONSE_STATE.OKAY -> {
+                            Log.d(TAG, "아이디 중복 체크 api 호출 성공 : ${nicknameCheckState}")
 
-                        when(nicknameCheckState?.state){
-                            NICKNAMECHECK_STATE.NICKNAME_AVAILABLE-> {
-                                Log.d(TAG, "닉네임 사용가능 여부 : 허용");
-                                nickname_state = true
-                                // 알림창 팝업
-                                AlertDialogManager.instance.simpleAlertDialog("사용 가능한 닉네임입니다", this, null)
-                            }
-                            NICKNAMECHECK_STATE.NICKNAME_DUPLICATE -> {
-                                Log.d(TAG, "닉네임 사용가능 여부 : 중복");
-                                // 알림창 팝업
-                                AlertDialogManager.instance.simpleAlertDialog("사용 불가한 닉네임입니다", this, null)
+                            when (nicknameCheckState?.state) {
+                                NICKNAMECHECK_STATE.NICKNAME_AVAILABLE -> {
+                                    Log.d(TAG, "닉네임 사용가능 여부 : 허용");
+                                    nickname_state = true
+                                    // 알림창 팝업
+                                    AlertDialogManager.instance.simpleAlertDialog(
+                                        "사용 가능한 닉네임입니다",
+                                        this,
+                                        null
+                                    )
+                                }
+
+                                NICKNAMECHECK_STATE.NICKNAME_DUPLICATE -> {
+                                    Log.d(TAG, "닉네임 사용가능 여부 : 중복");
+                                    // 알림창 팝업
+                                    AlertDialogManager.instance.simpleAlertDialog(
+                                        "사용 불가한 닉네임입니다",
+                                        this,
+                                        null
+                                    )
+                                }
                             }
                         }
+
+                        HTTP_RESPONSE_STATE.FAIL -> {
+                            Log.d(TAG, "아이디 중복 체크 api 호출 실패 : ${nicknameCheckState}")
+                            Toast.makeText(this, " 네트워크 통신 오류", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                    HTTP_RESPONSE_STATE.FAIL -> {
-                        Log.d(TAG, "아이디 중복 체크 api 호출 실패 : ${nicknameCheckState}")
-                        Toast.makeText(this, " 네트워크 통신 오류", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
+                })
         }
         // 회원가입 화면에서 '회원가입 취소' 버튼을 눌렀을 떄
         binding.memberJoinCancelBtn.setOnClickListener {
             Log.d(TAG, "MemberJoinActivity - 회원가입 취소 버튼 누름");
             // 이벤트 핸들러 등록
-            val eventHandler = DialogInterface.OnClickListener{ dialogInterface, i ->
-                when(i){
+            val eventHandler = DialogInterface.OnClickListener { dialogInterface, i ->
+                when (i) {
                     DialogInterface.BUTTON_POSITIVE -> {
                         Log.d(TAG, "회원가입 취소-> 예")
                         finish()    // 액티비티 종료
                     }
+
                     DialogInterface.BUTTON_NEGATIVE -> Log.d(TAG, "회원가입 취소-> 아니오")
                 }
             }
@@ -405,56 +459,73 @@ class MemberJoinActivity : AppCompatActivity() {
         // 회원가입 화면에서 '회원가입하기'버튼을 눌렀을 때
         binding.memberJoinBtn.setOnClickListener {
             Log.d(TAG, "MemberJoinActivity - 회원가입 버튼 클릭 됨")
-            
+
             // 비밀번호 and 비밀번호 확인 일치 확인
             var passwd1 = binding.passwordTextInputEditText.text.toString()
             var passwd2 = binding.passwordRecheckTextInputEditText.text.toString()
-            if(passwd1 == passwd2){
+            if (passwd1 == passwd2) {
                 passwd_state = true
             }
 
             // 비밀번호 일치, 아이디, 닉네임 중복 체크 확인 여부
-            if(passwd_state && id_check_state && nickname_state){
-                val member = MemberJoinModel(id = binding.idTextInputEditText.text.toString(),
+            if (passwd_state && id_check_state && nickname_state) {
+                val member = MemberJoinModel(
+                    id = binding.idTextInputEditText.text.toString(),
                     passwd = binding.passwordTextInputEditText.text.toString(),
                     nickname = binding.nicknameTextviewInputEditText.text.toString(),
                     email = binding.emailTextviewInputEditText.text.toString(),
                     mobile = binding.mobileTextviewInputEditText.text.toString()
                 )
-                RetrofitManager.instance.memberJoin(member, completion = {
-                        httpResponseState, memberJoinState ->
-                    // 통신 성공, 실패 여부
-                    when(httpResponseState){
-                        HTTP_RESPONSE_STATE.OKAY -> {
-                            Log.d(TAG, "회원가입 api 호출 성공 : ${memberJoinState}");
-                            when(memberJoinState?.state){
-                                MEMBERJOIN_STATE.SUCCESS -> {
-                                    Log.d(TAG, "회원가입 성공")
-                                    val eventHandler = DialogInterface.OnClickListener{ dialogInterface, i ->
-                                        when(i){
-                                            DialogInterface.BUTTON_POSITIVE -> {
-                                                val intent: Intent = Intent(this, MainActivity::class.java)
-                                                startActivity(intent)
+                RetrofitManager.instance.memberJoin(
+                    member,
+                    completion = { httpResponseState, memberJoinState ->
+                        // 통신 성공, 실패 여부
+                        when (httpResponseState) {
+                            HTTP_RESPONSE_STATE.OKAY -> {
+                                Log.d(TAG, "회원가입 api 호출 성공 : ${memberJoinState}");
+                                when (memberJoinState?.state) {
+                                    MEMBERJOIN_STATE.SUCCESS -> {
+                                        Log.d(TAG, "회원가입 성공")
+                                        val eventHandler =
+                                            DialogInterface.OnClickListener { dialogInterface, i ->
+                                                when (i) {
+                                                    DialogInterface.BUTTON_POSITIVE -> {
+                                                        Log.d(TAG, "닫기 버튼 누름")
+                                                        finish()
+                                                    }
+                                                }
                                             }
-                                        }
+                                        AlertDialogManager.instance.simpleAlertDialog("회원가입에 성공했습니다..!", this, eventHandler)
                                     }
-                                    AlertDialogManager.instance.simpleAlertDialog("회원가입에 성공했습니다..!", this, eventHandler)
-                                }
-                                MEMBERJOIN_STATE.FAIL -> {
-                                    Log.d(TAG, "회원가입 실패")
+
+                                    MEMBERJOIN_STATE.FAIL -> {
+                                        Log.d(TAG, "회원가입 실패")
+                                    }
                                 }
                             }
+
+                            HTTP_RESPONSE_STATE.FAIL -> {
+                                Toast.makeText(this, " 네트워크 통신 오류", Toast.LENGTH_SHORT).show()
+                                Log.d(TAG, "회원가입 api 호출 실패 : ${memberJoinState}");
+                            }
                         }
-                        HTTP_RESPONSE_STATE.FAIL -> {
-                            Toast.makeText(this, " 네트워크 통신 오류", Toast.LENGTH_SHORT).show()
-                            Log.d(TAG, "회원가입 api 호출 실패 : ${memberJoinState}");
-                        }
-                    }
-                })
-            }else{
-                if(!id_check_state) AlertDialogManager.instance.simpleAlertDialog("아이디 중복 확인을 완료해 주세요", this, null)
-                if(!nickname_state) AlertDialogManager.instance.simpleAlertDialog("닉네임 중복 확인을 완료해 주세요", this, null)
-                if(!passwd_state) AlertDialogManager.instance.simpleAlertDialog("비밀번호가 서로 일치하지 않습니다", this, null)
+                    })
+            } else {
+                if (!id_check_state) AlertDialogManager.instance.simpleAlertDialog(
+                    "아이디 중복 확인을 완료해 주세요",
+                    this,
+                    null
+                )
+                if (!nickname_state) AlertDialogManager.instance.simpleAlertDialog(
+                    "닉네임 중복 확인을 완료해 주세요",
+                    this,
+                    null
+                )
+                if (!passwd_state) AlertDialogManager.instance.simpleAlertDialog(
+                    "비밀번호가 서로 일치하지 않습니다",
+                    this,
+                    null
+                )
             }
 
         }

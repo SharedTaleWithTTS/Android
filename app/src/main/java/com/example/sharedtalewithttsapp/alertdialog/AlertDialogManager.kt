@@ -18,8 +18,9 @@ class AlertDialogManager {
             setIcon(android.R.drawable.ic_dialog_info)
             setMessage(alertMessage)
             setPositiveButton("닫기", eventHandler)
+            setCancelable(false)
             show()
-        }
+        }.setCanceledOnTouchOutside(false)
     }
     // 예, 아니오 버튼
     fun ynAlertDialog(alertMessage : String, context: Context,eventHandler:DialogInterface.OnClickListener){
@@ -29,7 +30,8 @@ class AlertDialogManager {
             setMessage(alertMessage)
             setPositiveButton("예", eventHandler)
             setNegativeButton("아니오", eventHandler)
+            setCancelable(false)
             show()
-        }
+        }.setCanceledOnTouchOutside(false)
     }
 }

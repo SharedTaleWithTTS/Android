@@ -16,8 +16,8 @@ object NICKNAMECHECK_STATE {
     const val NICKNAME_DUPLICATE : String = "NICKNAME_DUPLICATE"
 }
 object MEMBERJOIN_STATE {
-    const val SUCCESS : String = "SUCCESS"
-    const val FAIL : String = "FAIL"
+    const val SUCCESS : String = "success"
+    const val FAIL : String = "fail"
 }
 object LOGIN_STATE {
     const val SUCCESS : String = "success"

@@ -1,5 +1,6 @@
 package com.example.sharedtalewithttsapp
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import com.example.sharedtalewithttsapp.viewholder.ReadingTaleAdapter
 
 class AddChildActivity : AppCompatActivity() {
     lateinit var binding : ActivityAddChildBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddChildBinding.inflate(layoutInflater)
@@ -64,6 +66,18 @@ class AddChildActivity : AppCompatActivity() {
                                 when (addChildResponse?.state) {
                                     ADD_CHILD_STATE.SUCCESS -> {
                                         Log.d(Constants.TAG, "아이 추가 성공")
+                                        val eventHandler =
+                                            DialogInterface.OnClickListener { dialogInterface, i ->
+                                                when (i) {
+                                                    DialogInterface.BUTTON_POSITIVE -> {
+                                                        Log.d(TAG, "닫기 버튼 누름")
+                                                        finish()
+                                                    }
+
+                                                }
+                                            }
+
+                                        AlertDialogManager.instance.simpleAlertDialog("아이 추가 성공했습니다..!", this, eventHandler)
                                     }
                                     ADD_CHILD_STATE.FAIL -> {
                                         Log.d(Constants.TAG, "아이 추가 실패")

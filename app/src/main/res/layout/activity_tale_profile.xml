@@ -47,7 +47,7 @@
                 android:id="@+id/text_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="평점 : 0"
+                android:text="평점 : 평가 없음"
                 android:textSize="17dp"/>
 
             <TextView
@@ -111,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:progressTint="@color/lightyellow"
         android:isIndicator="false"/>
 
     <LinearLayout

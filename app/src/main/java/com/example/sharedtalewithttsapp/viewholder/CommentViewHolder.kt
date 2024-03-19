@@ -8,13 +8,27 @@ import com.example.sharedtalewithttsapp.R
 import com.example.sharedtalewithttsapp.databinding.CommentRecyclerViewBinding
 import com.example.sharedtalewithttsapp.model.httpmodel.CommentListResponseModel
 import com.example.sharedtalewithttsapp.utils.Constants
-import com.google.type.DateTime
+import com.example.sharedtalewithttsapp.utils.Constants.TAG
+import org.joda.time.DateTime
+import org.joda.time.Duration
+import org.joda.time.Period
+import org.joda.time.format.PeriodFormatterBuilder
 
 class CommentViewHolder(val binding: CommentRecyclerViewBinding): RecyclerView.ViewHolder(binding.root)
 
 class CommentAdapter(private var datas: CommentListResponseModel, private val clickListener: (String, Int ,Boolean) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val commentListSave = datas.commentList
+
+    // 현재 시간과의 차이를 분 단위로 받아 "몇 분 전"과 같은 형식으로 변환하는 함수
+    private fun formatTimeAgo(minutes: Long): String {
+        val formatter = PeriodFormatterBuilder()
+            .appendMinutes().appendSuffix(" 분 전").printZeroNever()
+            .appendHours().appendSuffix(" 시간 전").printZeroNever()
+            .toFormatter()
+
+        return formatter.print(Period().withMinutes(minutes.toInt()))
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         CommentViewHolder(CommentRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -37,14 +51,32 @@ class CommentAdapter(private var datas: CommentListResponseModel, private val cl
             "I" -> "내향형"
             else -> ""
         }
-/*
-        val dateStringFromServer = datas.commentList[position].writeDate
 
-        val currentTime = DateTime.now()                // 현재 시간
-*/
+        val dateStringFromServer = datas.commentList[position].writeDate    // 서버에서 받은 문자열
+        Log.d(TAG, "서버시간 : ${dateStringFromServer}")
+        val currentTime = DateTime.now()                                    // 현재 시간
+        val serverTime = DateTime.parse(dateStringFromServer)               // 서버에서 받아온 날짜 문자열을 DateTime 객체로 변환
+        val duration = Duration(serverTime, currentTime)                    // 현재 시간과 서버에서 받아온 시간의 차이 계산
+        val minutes = duration.standardMinutes                              // 차이를 분 단위로 변환
+        val resultDate = when {
+            minutes < 60 -> {
+                "${minutes}분 전"
+            }
+            minutes < 1440 -> {
+                val hours = minutes / 60
+                val remainingMinutes = minutes % 60
+                "${hours}시간 ${remainingMinutes}분 전"
+            }
+            else -> {
+                val days = minutes / 1440
+                "${days}일 전"
+            }
+        }
+
+
         binding.textNickname.setText(datas.commentList[position].nickname)
         binding.textChildInfo.setText("${datas.commentList[position].childAge}세 ${tempChildGender} ${tempChildPersonality}")
-        binding.textDate.setText(datas.commentList[position].writeDate)
+        binding.textDate.setText(resultDate)
         binding.likeNum.setText(datas.commentList[position].like)
         var q : String = ""
         var a : String = ""
@@ -70,7 +102,6 @@ class CommentAdapter(private var datas: CommentListResponseModel, private val cl
         binding.likeBtn.setOnClickListener {
             Log.d(Constants.TAG, "index = ${position} 좋아요 클릭 됨")
 
-            // notifyDataSetChanged() // 변경된 상태를 반영
             clickListener(datas.commentList[position].commentId, position , likeState)
         }
     }

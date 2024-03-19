@@ -26,8 +26,8 @@ import com.example.sharedtalewithttsapp.viewholder.ReadingTaleAdapter
 
 class SelectChildProfileActivity : AppCompatActivity(){
     lateinit var binding: ActivitySelectChildProfileBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         binding = ActivitySelectChildProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(TAG, "SelectChildProfileActivity - onCreate() called");
@@ -75,6 +75,10 @@ class SelectChildProfileActivity : AppCompatActivity(){
             val intent: Intent = Intent(this, AddChildActivity::class.java)
             startActivity(intent)
         }
+
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
     }
 

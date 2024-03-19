@@ -59,7 +59,14 @@ class TaleProfileActivity : AppCompatActivity() {
                                 if(favoritesState){
                                     binding.favoritesBtn.setImageResource(R.drawable.favorites_activate)
                                 }
-                                binding.ratingBar.rating = stateCheck!!.rate.toFloat()
+                                if(stateCheck!!.rate.compareTo("-1") != 0){
+                                    binding.ratingBar.rating = stateCheck!!.rate.toFloat()
+                                }else{
+                                    binding.textMyRating.text = "내 평점 : 평가 없음"
+                                }
+
+
+
                             }
                             STATE_CHECK_RESPONSE_STATE.FAIL -> {
                                 Log.d(TAG, "상태 check 실패")
@@ -84,7 +91,9 @@ class TaleProfileActivity : AppCompatActivity() {
         binding.textLike.setText("좋아요 : ${taleInfo?.like}")
         binding.textReviews.setText("댓글 수 : ${taleInfo?.reviews}")
         binding.textViews.setText("조회수 : ${taleInfo?.views}")
-        binding.textRate.setText("평점 : ${taleInfo?.rate}")
+        if(taleInfo.rate.compareTo("false") != 0) {
+            binding.textRate.setText("평점 : ${taleInfo?.rate}")
+        }
 
 
 
