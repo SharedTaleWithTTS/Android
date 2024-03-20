@@ -72,5 +72,8 @@ dependencies {
 
     // joda-time
     implementation("joda-time:joda-time:2.10.13")
+    // Logging 라이브러리
+    implementation("com.jakewharton.timber:timber:4.7.1")
+
 
 }

@@ -15,6 +15,7 @@ import com.example.sharedtalewithttsapp.utils.Constants
 import com.example.sharedtalewithttsapp.utils.Constants.TAG
 import com.example.sharedtalewithttsapp.utils.HOME_SCREEN_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE
+import com.example.sharedtalewithttsapp.utils.Logr
 import com.example.sharedtalewithttsapp.viewholder.TaleListAdapter
 
 class HomeScreenActivity : AppCompatActivity() {
@@ -85,6 +86,25 @@ class HomeScreenActivity : AppCompatActivity() {
                             binding.recentlyViewRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
 
                             // 최근 본 동화 출력 끝   //
+
+                            // 여기서부터 추천 동화 출력
+                            binding.recommendRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                            binding.recommendRecyclerView.adapter = TaleListAdapter(homeScreenResponse.recommend, clickListener = {
+                                    taleId ->
+                                var taleModel : TaleModel
+
+                                val intent: Intent = Intent(this, TaleProfileActivity::class.java)
+                                for(i in homeScreenResponse.recentlyView){
+                                    if(taleId == i.id) {
+                                        taleModel = i
+                                        intent.putExtra("taleInfo", taleModel)
+                                    }
+                                }
+                                startActivity(intent)
+                            }, this)
+                            binding.recommendRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
+
+                            // 추천 동화 출력 끝   //
                         }
                         HOME_SCREEN_RESPONSE_STATE.FAIL -> {
                             Log.d(Constants.TAG, "불러오기 실패");

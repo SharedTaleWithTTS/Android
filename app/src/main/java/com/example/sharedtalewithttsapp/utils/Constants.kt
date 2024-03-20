@@ -1,7 +1,19 @@
 package com.example.sharedtalewithttsapp.utils
 
+import android.util.Log
+
 object Constants {
     const val TAG: String = "로그"
+}
+object Logr {
+    fun d(tag: String, msg: String) {
+        if(msg.length > 4000) {
+            Log.d(tag, msg.substring(0, 4000))
+            Logr.d(tag, msg.substring(4000))
+        } else {
+            Log.d(tag, msg)
+        }
+    }
 }
 enum class HTTP_RESPONSE_STATE {
     OKAY,
