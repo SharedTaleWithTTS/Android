@@ -94,7 +94,7 @@ class HomeScreenActivity : AppCompatActivity() {
                                 var taleModel : TaleModel
 
                                 val intent: Intent = Intent(this, TaleProfileActivity::class.java)
-                                for(i in homeScreenResponse.recentlyView){
+                                for(i in homeScreenResponse.recommend){
                                     if(taleId == i.id) {
                                         taleModel = i
                                         intent.putExtra("taleInfo", taleModel)

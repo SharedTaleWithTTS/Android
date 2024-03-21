@@ -29,7 +29,7 @@ class TaleListAdapter(private var datas: MutableList<TaleModel>, private val cli
         binding.title.setText(datas[position].title)
         GlideManager.instance.serverImageRequest(
             context,
-            datas!![position].taleImage,
+            datas[position].taleImage,
             500,
             500,
             binding.taleImage
