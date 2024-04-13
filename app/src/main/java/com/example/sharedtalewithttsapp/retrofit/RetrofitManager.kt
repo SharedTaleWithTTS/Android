@@ -369,5 +369,46 @@ class RetrofitManager {
             }
         })
     }
+    // 회원 탈퇴
+    fun withDraw(id: String, completion: (HTTP_RESPONSE_STATE, Int?) -> Unit){
+        val call = iRetrofit?.withDraw(id) ?: return
+
+        call.enqueue(object : retrofit2.Callback<Void>{
+            override fun onResponse(call: Call<Void>,
+                                    response: Response<Void>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.code()}")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.code())
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    // 아이 삭제
+    fun deleteChild(id: String, completion: (HTTP_RESPONSE_STATE, Int?) -> Unit){
+        val call = iRetrofit?.deleteChild(id) ?: return
+
+        call.enqueue(object : retrofit2.Callback<Void>{
+            override fun onResponse(call: Call<Void>,
+                                    response: Response<Void>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.code()}")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.code())
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
 
 }

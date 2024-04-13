@@ -1,6 +1,7 @@
 package com.example.sharedtalewithttsapp.utils
 
 import android.util.Log
+import firebase.com.protolitewrapper.BuildConfig
 
 object Constants {
     const val TAG: String = "로그"
@@ -100,5 +101,8 @@ object API {
     const val RATE_REQUEST : String =  "/pybo/requestRate/"
     const val HOME_SCREEN_REQUEST : String = "/pybo/requestHome/"
     const val STATE_CHECK : String = "/pybo/requestCheck/"
+
+    const val WITHDRAW_MEMBER : String = "/pybo/signup/{id}"
+    const val DELETE_CHILD : String = "/pybo/addChild/{id}"
 
 }

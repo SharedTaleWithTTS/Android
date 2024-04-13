@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_setting"
+        android:title="설정"
+        android:icon="@drawable/image_setting"/>
+    <item
+        android:id="@+id/navigation_make_tale"
+        android:title="동화 제작하기"
+        android:icon="@drawable/image_setting"/>
+    <item
+        android:id="@+id/navigation_change_child"
+        android:title="아이 변경하기"
+        android:icon="@drawable/change_child"/>
+    <item
+        android:id="@+id/navigation_logout"
+        android:title="로그아웃"
+        android:icon="@drawable/logout"/>
+    <item
+        android:id="@+id/navigation_delete_child"
+        android:title="아이 삭제"
+        android:icon="@drawable/leave_member"
+        />
+    <item
+        android:id="@+id/navigation_withdraw_member"
+        android:title="회원 탈퇴"
+        android:icon="@drawable/leave_member"/>
+</menu>

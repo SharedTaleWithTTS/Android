@@ -37,6 +37,7 @@ class ChildProfileAdapter(private var datas: ChildProfileResponseModel, private 
         binding.recyclerViewLayout.setOnClickListener {
             Log.d(TAG, "index = ${position} 클릭 됨")
             AppData.instance.setChildId(datas.childProfileList[position].childId)
+            AppData.instance.setChildInfo(datas.childProfileList[position])
             Log.d(TAG, "현재 AppData childId : ${AppData.instance.getChildId()}");
             clickListener()
         }

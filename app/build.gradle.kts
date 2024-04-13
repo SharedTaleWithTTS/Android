@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
 
 plugins {
@@ -74,6 +75,8 @@ dependencies {
     implementation("joda-time:joda-time:2.10.13")
     // Logging 라이브러리
     implementation("com.jakewharton.timber:timber:4.7.1")
+    // drawerlayout
+    implementation ("androidx.drawerlayout:drawerlayout:1.2.0")
 
 
 }

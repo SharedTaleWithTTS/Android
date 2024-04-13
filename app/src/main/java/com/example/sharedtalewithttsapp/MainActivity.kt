@@ -15,6 +15,7 @@ import com.example.sharedtalewithttsapp.sharedpreferences.SharedManager
 import com.example.sharedtalewithttsapp.utils.Constants.TAG
 import com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.LOGIN_STATE
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             binding.editLoginPasswd.setText(currentUser.passwd)
             binding.cbLoginSave.isChecked = true
         }
+
 
 
         // '회원가입하기' 버튼을 눌렀을 떄
@@ -58,6 +60,10 @@ class MainActivity : AppCompatActivity() {
                             LOGIN_STATE.SUCCESS -> {
                                 Log.d(TAG, "로그인 성공")
                                 AppData.instance.setUserId(loginResponse.user.id)
+                                AppData.instance.setUserNickname(loginResponse.user.nickname)
+                                AppData.instance.setUserEmail(loginResponse.user.email)
+                                AppData.instance.setUserMobile(loginResponse.user.mobile)
+                                
                                 val intent: Intent = Intent(this, SelectChildProfileActivity::class.java)
                                 startActivity(intent)
                             }
@@ -69,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     HTTP_RESPONSE_STATE.FAIL -> {
                         Log.d(TAG, "로그인 api 호출 실패 : ${loginResponse}");
+                        AlertDialogManager.instance.simpleAlertDialog("네트워크 오류..!", this, null)
                     }
                 }
             })

@@ -34,7 +34,9 @@ import com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentResponseMode
 import com.example.sharedtalewithttsapp.utils.API
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface IRetrofit {
 
@@ -112,5 +114,17 @@ interface IRetrofit {
     fun stateCheck(
         @Body stateCheckInfo : StateCheckRequestModel
     ): Call<StateCheckResponseModel>
+
+    @DELETE(API.WITHDRAW_MEMBER)
+    fun withDraw(
+        @Path("id") userId : String
+    ): Call<Void>
+
+    @DELETE(API.DELETE_CHILD)
+    fun deleteChild(
+        @Path("id") childId : String
+    ): Call<Void>
+
+
 
 }
