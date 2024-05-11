@@ -37,7 +37,7 @@ class ReadingTaleAdapter(private var datas: TestReadingTaleResponseModel) : Recy
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //Log.d(Constants.TAG, "MyAdapter - onBindViewHolder() called : $position")
+
         
         val binding = (holder as ReadingTaleViewHolder).binding
         val binding2 = (holder as ReadingTaleViewHolder).binding2

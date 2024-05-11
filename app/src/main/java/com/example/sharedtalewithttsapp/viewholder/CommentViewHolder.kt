@@ -38,7 +38,7 @@ class CommentAdapter(private var datas: CommentListResponseModel, private val cl
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d(Constants.TAG, "CommentAdapter - position = ${position}");
+
         val binding = (holder as CommentViewHolder).binding
 
         var tempChildGender = when(datas.commentList[position].childGender){

@@ -23,7 +23,7 @@ class SearchResultAdapter(private var datas: SearchResponseModel, private val cl
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d(Constants.TAG, "SearchResultAdapter - position = ${position}");
+
         val binding = (holder as SearchResultViewHolder).binding
         binding.textTaleTitle.text = datas.searchResult[position].title
 

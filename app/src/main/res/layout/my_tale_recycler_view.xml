@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_tale_recycler_view_layout"
+    android:layout_width="150dp"
+    android:layout_height="180dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/my_tale_recycler_view_image"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/image_send"/>
+
+    <TextView
+        android:id="@+id/my_tale_recycler_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="제목입니다."/>
+
+</LinearLayout>

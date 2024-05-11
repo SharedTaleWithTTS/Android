@@ -7,7 +7,11 @@
     <item
         android:id="@+id/navigation_make_tale"
         android:title="동화 제작하기"
-        android:icon="@drawable/image_setting"/>
+        android:icon="@drawable/make_tale"/>
+    <item
+        android:id="@+id/navigation_my_tale_list"
+        android:title="내가 만든 동화 보기"
+        android:icon="@drawable/make_tale"/>
     <item
         android:id="@+id/navigation_change_child"
         android:title="아이 변경하기"

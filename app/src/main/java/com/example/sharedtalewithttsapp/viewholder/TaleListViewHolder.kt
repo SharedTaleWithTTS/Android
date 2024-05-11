@@ -23,7 +23,6 @@ class TaleListAdapter(private var datas: MutableList<TaleModel>, private val cli
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d(Constants.TAG, "TaleListAdapter - position = ${position}");
         val binding = (holder as TaleListViewHolder).binding
 
         binding.title.setText(datas[position].title)

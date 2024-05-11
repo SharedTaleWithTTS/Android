@@ -19,6 +19,8 @@ import com.example.sharedtalewithttsapp.model.httpmodel.IdCheckModel
 import com.example.sharedtalewithttsapp.model.httpmodel.IdCheckState
 import com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinModel
 import com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinState
+import com.example.sharedtalewithttsapp.model.httpmodel.MyTaleListRequestModel
+import com.example.sharedtalewithttsapp.model.httpmodel.MyTaleListResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckModel
 import com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckState
 import com.example.sharedtalewithttsapp.model.httpmodel.RateRequestModel
@@ -34,6 +36,7 @@ import com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentResponseMode
 import com.example.sharedtalewithttsapp.utils.API
 import com.example.sharedtalewithttsapp.utils.Constants.TAG
 import com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 
@@ -55,7 +58,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<IdCheckState>,
                                     response: Response<IdCheckState>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -76,7 +79,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<NicknameCheckState>,
                                     response: Response<NicknameCheckState>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -98,7 +101,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<MemberJoinState>,
                                     response: Response<MemberJoinState>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -119,7 +122,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<LoginResponseModel>,
                                     response: Response<LoginResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -205,7 +208,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<SearchResponseModel>,
                                     response: Response<SearchResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -227,7 +230,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<WriteCommentResponseModel>,
                                     response: Response<WriteCommentResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -249,7 +252,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<TaleLikeResponseModel>,
                                     response: Response<TaleLikeResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -270,7 +273,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<CommentListResponseModel>,
                                     response: Response<CommentListResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -293,7 +296,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<FavoritesResponseModel>,
                                     response: Response<FavoritesResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -315,7 +318,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<HomeScreenResponseModel>,
                                     response: Response<HomeScreenResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -336,7 +339,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<RateResponseModel>,
                                     response: Response<RateResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -357,7 +360,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<StateCheckResponseModel>,
                                     response: Response<StateCheckResponseModel>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.body()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.body())
             }
@@ -377,7 +380,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<Void>,
                                     response: Response<Void>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.code()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.code())
             }
@@ -398,12 +401,54 @@ class RetrofitManager {
             override fun onResponse(call: Call<Void>,
                                     response: Response<Void>
             ) {
-                Log.d(TAG, "RetrofitManager -onResponse() called / ${response.code()}")
+                Log.d(TAG, "RetrofitManager -onResponse() called")
 
                 completion(HTTP_RESPONSE_STATE.OKAY, response.code())
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    // 이미지 전송
+    fun sendImage(image: MutableList<MultipartBody.Part?>, mp3: MutableList<MultipartBody.Part?>, userId : String, title : String, completion: (HTTP_RESPONSE_STATE, Int?) -> Unit){
+        val call = iRetrofit?.sendImage(image,mp3, userId, title) ?: return
+
+        call.enqueue(object : retrofit2.Callback<Void>{
+            override fun onResponse(call: Call<Void>,
+                                    response: Response<Void>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.code())
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    // 사용자 제작동화 리스트 api 호출
+    fun myTaleList(myTaleListInfo: MyTaleListRequestModel, completion: (HTTP_RESPONSE_STATE, MyTaleListResponseModel?) -> Unit){
+        val call = iRetrofit?.myTaleList(myTaleListInfo) ?: return
+
+        call.enqueue(object : retrofit2.Callback<MyTaleListResponseModel>{
+            override fun onResponse(call: Call<MyTaleListResponseModel>,
+                                    response: Response<MyTaleListResponseModel>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.body())
+            }
+
+            override fun onFailure(call: Call<MyTaleListResponseModel>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
 
                 completion(HTTP_RESPONSE_STATE.FAIL, null)

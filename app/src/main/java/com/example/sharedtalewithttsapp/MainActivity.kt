@@ -81,17 +81,19 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+
+        binding.textBtn.setOnClickListener {
+            val intent: Intent = Intent(this, CreateTaleActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.test2Btn.setOnClickListener {
+            val intent: Intent = Intent(this, MyTaleListActivity::class.java)
+            startActivity(intent)
+        }
+
     }// onCreate 코드 끝
 
-    override fun onStart() {
-        Log.d(TAG, "MainActivity - onStart() called");
-        super.onStart()
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "MainActivity - onPause() called");
-        super.onPause()
-    }
     override fun onStop() {
         Log.d(TAG, "MainActivity - onStop() called");
         if(binding.cbLoginSave.isChecked){
@@ -113,9 +115,5 @@ class MainActivity : AppCompatActivity() {
         }
         super.onStop()
     }
-    override fun onDestroy() {
-        Log.d(TAG, "MainActivity - onDestroy() called");
 
-        super.onDestroy()
-    }
 }

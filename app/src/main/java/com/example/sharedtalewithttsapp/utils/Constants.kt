@@ -81,6 +81,10 @@ object STATE_CHECK_RESPONSE_STATE {
     const val SUCCESS : String = "success"
     const val FAIL : String = "failure"
 }
+object MY_TALE_LIST_RESPONSE_STATE {
+    const val SUCCESS : String = "success"
+    const val FAIL : String = "failure"
+}
 
 object API {
     const val BASE_URL : String = "http://112.152.27.80:8000"
@@ -105,4 +109,7 @@ object API {
     const val WITHDRAW_MEMBER : String = "/pybo/signup/{id}"
     const val DELETE_CHILD : String = "/pybo/addChild/{id}"
 
+    const val SEND_IMAGE : String = "/pybo/imageUpload/"
+
+    const val REQUEST_MY_TALE_LIST : String = "/pybo/requestMakeVideoList/"
 }

@@ -30,7 +30,7 @@ class ChildProfileAdapter(private var datas: ChildProfileResponseModel, private 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d(TAG, "ChildProfileAdapter - position = ${position}");
+
         val binding = (holder as ChildProfileViewHolder).binding
         binding.textChildName.text = datas.childProfileList[position].childName
         

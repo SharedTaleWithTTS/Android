@@ -173,6 +173,15 @@ class HomeScreenActivity : AppCompatActivity() {
         binding.homeScreenNavigationView.setNavigationItemSelectedListener {
             
             when(it.itemId){
+                // 동화 제작하기 버튼을 눌렀을 때
+                R.id.navigation_make_tale -> {
+                    val intent = Intent(this, CreateTaleActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.navigation_my_tale_list -> {
+                    val intent = Intent(this, MyTaleListActivity::class.java)
+                    startActivity(intent)
+                }
                 // 아이 변경 눌렀을 때
                 R.id.navigation_change_child -> {
                     val intent = Intent(this, SelectChildProfileActivity::class.java)

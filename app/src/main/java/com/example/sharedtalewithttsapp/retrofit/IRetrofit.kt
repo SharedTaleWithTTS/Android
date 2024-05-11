@@ -19,6 +19,8 @@ import com.example.sharedtalewithttsapp.model.httpmodel.IdCheckModel
 import com.example.sharedtalewithttsapp.model.httpmodel.IdCheckState
 import com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinModel
 import com.example.sharedtalewithttsapp.model.httpmodel.MemberJoinState
+import com.example.sharedtalewithttsapp.model.httpmodel.MyTaleListRequestModel
+import com.example.sharedtalewithttsapp.model.httpmodel.MyTaleListResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckModel
 import com.example.sharedtalewithttsapp.model.httpmodel.NicknameCheckState
 import com.example.sharedtalewithttsapp.model.httpmodel.RateRequestModel
@@ -32,11 +34,15 @@ import com.example.sharedtalewithttsapp.model.httpmodel.TaleLikeResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.WriteCommentResponseModel
 import com.example.sharedtalewithttsapp.utils.API
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface IRetrofit {
 
@@ -125,6 +131,18 @@ interface IRetrofit {
         @Path("id") childId : String
     ): Call<Void>
 
+    @Multipart
+    @POST(API.SEND_IMAGE)
+    fun sendImage(
+        @Part imageFile : MutableList<MultipartBody.Part?>,
+        @Part mp3File: MutableList<MultipartBody.Part?>,
+        @Query("userId") userId: String,
+        @Query("title") title: String
+    ): Call<Void>
 
+    @POST(API.REQUEST_MY_TALE_LIST)
+    fun myTaleList(
+        @Body myTaleListInfo : MyTaleListRequestModel
+    ): Call<MyTaleListResponseModel>
 
 }

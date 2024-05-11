@@ -59,7 +59,7 @@ dependencies {
 
     // 네트워크 통신 Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // retrofit interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
@@ -77,6 +77,8 @@ dependencies {
     implementation("com.jakewharton.timber:timber:4.7.1")
     // drawerlayout
     implementation ("androidx.drawerlayout:drawerlayout:1.2.0")
+    // 구글 EXO 라이브러리 (오디오 and 비디오)
+    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
 
 
 }
