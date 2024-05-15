@@ -3,4 +3,7 @@
 
     <string name="drawer_open">드로어 열림</string>
     <string name="drawer_close">드로어 닫힘</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_create_tale">1. 내 파일에서 필요한 이미지와 음성을 가져옵니다.\n2. 동화 장면 추가하기 버튼을 눌러 장면을 추가합니다.\n3. 추가한 장면에서 \'+\' 버튼을 눌러 이미지를 가져오고, 음성 가져오기 버튼을 눌러 음성을 추가합니다.\n4.마지막으로 동화 제작하기 버튼을 누릅니다.</string>
 </resources>

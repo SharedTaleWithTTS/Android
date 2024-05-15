@@ -10,7 +10,11 @@ import com.example.sharedtalewithttsapp.model.httpmodel.CommentListResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.FavoritesRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.FavoritesResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel2
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel3
 import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel2
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel3
 import com.example.sharedtalewithttsapp.model.httpmodel.LoginRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.LoginResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.TestReadingTaleRequestModel
@@ -324,6 +328,46 @@ class RetrofitManager {
             }
 
             override fun onFailure(call: Call<HomeScreenResponseModel>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+    // 홈 화면2 요청 api 호출
+    fun homeScreen2(homeScreenInfo2: HomeScreenRequestModel2, completion: (HTTP_RESPONSE_STATE, HomeScreenResponseModel2?) -> Unit){
+        val call = iRetrofit?.homeScreen2(homeScreenInfo2) ?: return
+
+        call.enqueue(object : retrofit2.Callback<HomeScreenResponseModel2>{
+            override fun onResponse(call: Call<HomeScreenResponseModel2>,
+                                    response: Response<HomeScreenResponseModel2>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.body())
+            }
+
+            override fun onFailure(call: Call<HomeScreenResponseModel2>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
+
+                completion(HTTP_RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+    // 홈 화면3 요청 api 호출
+    fun homeScreen3(homeScreenInfo3: HomeScreenRequestModel3, completion: (HTTP_RESPONSE_STATE, HomeScreenResponseModel3?) -> Unit){
+        val call = iRetrofit?.homeScreen3(homeScreenInfo3) ?: return
+
+        call.enqueue(object : retrofit2.Callback<HomeScreenResponseModel3>{
+            override fun onResponse(call: Call<HomeScreenResponseModel3>,
+                                    response: Response<HomeScreenResponseModel3>
+            ) {
+                Log.d(TAG, "RetrofitManager -onResponse() called ")
+
+                completion(HTTP_RESPONSE_STATE.OKAY, response.body())
+            }
+
+            override fun onFailure(call: Call<HomeScreenResponseModel3>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - onFailure() called / t: $t")
 
                 completion(HTTP_RESPONSE_STATE.FAIL, null)

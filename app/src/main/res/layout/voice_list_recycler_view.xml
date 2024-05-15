@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="테스트"
-        android:textSize="40dp"/>
+        android:textSize="23dp"/>
 
     <ImageView
         android:id="@+id/voice_list_recycler_view_play_stop_btn"

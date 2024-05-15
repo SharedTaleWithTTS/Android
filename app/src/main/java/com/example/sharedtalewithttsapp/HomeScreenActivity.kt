@@ -26,7 +26,9 @@ import com.example.sharedtalewithttsapp.utils.HOME_SCREEN_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.HTTP_RESPONSE_STATE
 import com.example.sharedtalewithttsapp.utils.LOGIN_STATE
 import com.example.sharedtalewithttsapp.utils.Logr
+import com.example.sharedtalewithttsapp.viewholder.HomeScreenViewPagerAdapter
 import com.example.sharedtalewithttsapp.viewholder.TaleListAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.log
 
 class HomeScreenActivity : AppCompatActivity() {
@@ -37,14 +39,7 @@ class HomeScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "HomeScreenActivity - onCreate() called");
 
-    }
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "HomeScreenActivity - onStart() called");
-
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
-
-
         setContentView(binding.root)
         title = "아이랑"
 
@@ -53,93 +48,23 @@ class HomeScreenActivity : AppCompatActivity() {
         //binding.homeScreenDrawer.addDrawerListener(toggle)
         toggle.syncState()  // ActionBarDrawerToggle의 상태를 동기화
 
-        
-        
-        // 드로어 뷰에 기본적으로 보일 정보
+        val fragmentAdapter = HomeScreenViewPagerAdapter(this)
+
+        fragmentAdapter.addFragment(MyTaleFragment())       // 프래그먼트 추가
+        fragmentAdapter.addFragment(AllTaleFragment())       // 프래그먼트 추가
+        fragmentAdapter.addFragment(AllTaleListFragment())       // 프래그먼트 추가
+        binding.viewPager2.adapter = fragmentAdapter        // 뷰 페이저에 적용
+        binding.viewPager2.isUserInputEnabled = false       // 화면 슬라이드 제거
+        // 탭 이름 설정
+        val tabNameList = listOf<String>("내 동화", "이런 동화도 찾아보세요", "전체 동화 목록")
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            // 여기서 각 탭의 제목을 설정할 수 있습니다.
+
+            tab.text = tabNameList[position]
+        }.attach()
 
 
 
-        // 액티비티 시작시 통신, 홈 화면 정보 불러오기
-        val homeScreenInfo = HomeScreenRequestModel(userId = AppData.instance.getUserId(), childId = AppData.instance.getChildId())
-        RetrofitManager.instance.homeScreen(homeScreenInfo, completion = {
-                httpResponseState, homeScreenResponse ->
-
-            when(httpResponseState){
-                HTTP_RESPONSE_STATE.OKAY -> {
-                    Log.d(Constants.TAG, "홈 화면 요청 api 호출 성공 : ${homeScreenResponse}")
-
-                    when(homeScreenResponse?.state){
-                        HOME_SCREEN_RESPONSE_STATE.SUCCESS -> {
-                            Log.d(Constants.TAG, "불러오기 성공")
-
-                            // 여기서부터 즐겨찾기 한 동화 출력
-                            binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                            binding.favoriteRecyclerView.adapter = TaleListAdapter(homeScreenResponse.favorites, clickListener = {
-                                    taleId ->
-                                var taleModel : TaleModel
-
-                                val intent: Intent = Intent(this, TaleProfileActivity::class.java)
-                                for(i in homeScreenResponse.favorites){
-                                    if(taleId == i.id) {
-                                        taleModel = i
-                                        intent.putExtra("taleInfo", taleModel)
-                                    }
-                                }
-                                startActivity(intent)
-                            }, this)
-                            binding.favoriteRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
-
-                            // 즐겨찾기 한 동화 출력 끝   //
-
-                            // 여기서부터 최근 본 동화 출력
-                            binding.recentlyViewRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                            binding.recentlyViewRecyclerView.adapter = TaleListAdapter(homeScreenResponse.recentlyView, clickListener = {
-                                    taleId ->
-                                var taleModel : TaleModel
-
-                                val intent: Intent = Intent(this, TaleProfileActivity::class.java)
-                                for(i in homeScreenResponse.recentlyView){
-                                    if(taleId == i.id) {
-                                        taleModel = i
-                                        intent.putExtra("taleInfo", taleModel)
-                                    }
-                                }
-                                startActivity(intent)
-                            }, this)
-                            binding.recentlyViewRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
-
-                            // 최근 본 동화 출력 끝   //
-
-                            // 여기서부터 추천 동화 출력
-                            binding.recommendRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                            binding.recommendRecyclerView.adapter = TaleListAdapter(homeScreenResponse.recommend, clickListener = {
-                                    taleId ->
-                                var taleModel : TaleModel
-
-                                val intent: Intent = Intent(this, TaleProfileActivity::class.java)
-                                for(i in homeScreenResponse.recommend){
-                                    if(taleId == i.id) {
-                                        taleModel = i
-                                        intent.putExtra("taleInfo", taleModel)
-                                    }
-                                }
-                                startActivity(intent)
-                            }, this)
-                            binding.recommendRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
-
-                            // 추천 동화 출력 끝   //
-                        }
-                        HOME_SCREEN_RESPONSE_STATE.FAIL -> {
-                            Log.d(Constants.TAG, "불러오기 실패");
-                        }
-                    }
-                }
-                HTTP_RESPONSE_STATE.FAIL -> {
-                    Log.d(Constants.TAG, "홈 화면 요청 api 실패 : ${homeScreenResponse}");
-                }
-            }
-        })
-        //통신코드 끝
 
         // 검색 버튼을 눌렀을 때
         binding.searchBtn.setOnClickListener {
@@ -168,10 +93,10 @@ class HomeScreenActivity : AppCompatActivity() {
             }
         })
 
-        
+
         // 네비게이션 뷰 아이템 선택 됐을 때
         binding.homeScreenNavigationView.setNavigationItemSelectedListener {
-            
+
             when(it.itemId){
                 // 동화 제작하기 버튼을 눌렀을 때
                 R.id.navigation_make_tale -> {
@@ -261,7 +186,10 @@ class HomeScreenActivity : AppCompatActivity() {
             }
             true
         }
-
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "HomeScreenActivity - onStart() called");
     } // onStart
 
     override fun onResume() {

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -38,11 +39,12 @@ class CreateTaleAdapter(private val clickListener: (Int, Int) -> Unit)
         fun setBackground(color: Int) {
             itemView.setBackgroundColor(color)
         }
-
+        val text : TextView = itemView.findViewById<TextView>(R.id.create_tale_recycler_view_sence_text)
         var image : ImageView = itemView.findViewById<ImageView>(R.id.create_tale_recycler_view_image)
         val voiceBtn : Button = itemView.findViewById<Button>(R.id.create_tale_recycler_view_get_voice_btn)
         fun bindInfo(data: CreateTaleModel, position: Int) {
             Log.d(TAG, "CustomViewHolder - bindInfo() called");
+            text.text = "동화 장면 ${position + 1}"
             image.setImageURI(data.taleImage)
 
             image.setOnClickListener {
@@ -77,7 +79,6 @@ class CreateTaleAdapter(private val clickListener: (Int, Int) -> Unit)
         val insertPosition = newList.size
         newList.add(insertPosition, newItem)
         submitList(newList)
-
     }
     // 자리이동.현재 데이터 가져와서 바꿔치기한다. 위치가 한칸씩 바뀔때 마다 호출된다.
     fun moveItem(fromPosition: Int, toPosition: Int) {

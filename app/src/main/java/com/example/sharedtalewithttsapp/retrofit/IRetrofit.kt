@@ -10,7 +10,11 @@ import com.example.sharedtalewithttsapp.model.httpmodel.CommentListResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.FavoritesRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.FavoritesResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel2
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenRequestModel3
 import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel2
+import com.example.sharedtalewithttsapp.model.httpmodel.HomeScreenResponseModel3
 import com.example.sharedtalewithttsapp.model.httpmodel.LoginRequestModel
 import com.example.sharedtalewithttsapp.model.httpmodel.LoginResponseModel
 import com.example.sharedtalewithttsapp.model.httpmodel.TestReadingTaleRequestModel
@@ -110,6 +114,16 @@ interface IRetrofit {
     fun homeScreen(
         @Body homeScreenInfo : HomeScreenRequestModel
     ): Call<HomeScreenResponseModel>
+
+    @POST(API.HOME_SCREEN_REQUEST2)
+    fun homeScreen2(
+        @Body homeScreenInfo : HomeScreenRequestModel2
+    ): Call<HomeScreenResponseModel2>
+
+    @POST(API.HOME_SCREEN_REQUEST3)
+    fun homeScreen3(
+        @Body homeScreenInfo : HomeScreenRequestModel3
+    ): Call<HomeScreenResponseModel3>
 
     @POST(API.RATE_REQUEST)
     fun rate(

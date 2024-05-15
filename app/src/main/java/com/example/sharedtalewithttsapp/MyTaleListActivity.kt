@@ -67,6 +67,7 @@ class MyTaleListActivity : AppCompatActivity() /*, MediaPlayer.OnPreparedListene
         mediaController.setAnchorView(binding.surfaceView)
         mediaController.isEnabled = true
 
+
         // RecyclerView Adapter 설정
         adapter = MyTaleAdapter( clickListener = { uri ->
             Log.d(TAG, "이미지 클릭 후")
@@ -97,9 +98,8 @@ class MyTaleListActivity : AppCompatActivity() /*, MediaPlayer.OnPreparedListene
                             MY_TALE_LIST_RESPONSE_STATE.SUCCESS -> {
                                 Log.d(Constants.TAG, "사용자 제작동화 리스트 데이터 불러오기 성공")
 
-                                val newList = adapter.currentList.toMutableList()
-                                for (item in myTaleResponse.myTaleList) {
-                                    newList.add(item)
+                                val newList = adapter.currentList.toMutableList().apply {
+                                    addAll(myTaleResponse.myTaleList)
                                 }
                                 adapter.submitList(newList)
                             }

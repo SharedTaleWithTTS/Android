@@ -104,6 +104,8 @@ object API {
     const val FAVORITES_REQUEST : String = "/pybo/requestFavorite/"
     const val RATE_REQUEST : String =  "/pybo/requestRate/"
     const val HOME_SCREEN_REQUEST : String = "/pybo/requestHome/"
+    const val HOME_SCREEN_REQUEST2 : String = "/pybo/requestHome2/"
+    const val HOME_SCREEN_REQUEST3 : String = "/pybo/requestHome3/"
     const val STATE_CHECK : String = "/pybo/requestCheck/"
 
     const val WITHDRAW_MEMBER : String = "/pybo/signup/{id}"

@@ -74,25 +74,35 @@ class CreateTaleActivity : AppCompatActivity() {
         ActivityResultContracts.OpenMultipleDocuments()){ uris ->
         if(uris != null){
             val newList = imageAdapter.currentList.toMutableList()
-            for (item in uris) {
-                newList.add(item)
+            for (uri in uris) {
+
                 // 선택한 각 Uri에 대해 지속적인 접근 권한을 얻습니다.
                 try {
                     val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                    contentResolver.takePersistableUriPermission(item, takeFlags)
+                    contentResolver.takePersistableUriPermission(uri, takeFlags)
                 } catch (e: SecurityException) {
                     Log.d(TAG, "권한 요청 실패 : ${e}");
                 }
+                newList.add(uri)
             }
             imageAdapter.submitList(newList)
         }
     }
     private val pickAudio = registerForActivityResult(
         ActivityResultContracts.GetMultipleContents()){ uris ->
+        Log.d(TAG, "uris : ${uris}");
         if(uris != null){
             val newList = voiceAdapter.currentList.toMutableList()
             for (uri in uris) {
+                // 선택한 각 Uri에 대해 지속적인 접근 권한을 얻습니다.
+                try {
+                    val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    contentResolver.takePersistableUriPermission(uri, takeFlags)
+                } catch (e: SecurityException) {
+                    Log.d(TAG, "권한 요청 실패 : ${e}");
+                }
                 val audioTitle = getAudioTitle(uri)
                 newList.add(PickVoiceListModel(audioTitle, uri))
             }
@@ -111,10 +121,12 @@ class CreateTaleActivity : AppCompatActivity() {
         var title = ""
         val projection = arrayOf(MediaStore.Audio.Media.TITLE)
         val cursor = contentResolver.query(uri, projection, null, null, null)
+
         cursor?.use {
             if (it.moveToFirst()) {
                 val titleIndex = it.getColumnIndex(MediaStore.Audio.Media.TITLE)
-                title = it.getString(titleIndex)
+
+                title = it.getString(titleIndex) ?: "알 수 없는 오디오"
             }
         }
         return title
@@ -223,8 +235,10 @@ class CreateTaleActivity : AppCompatActivity() {
         imageAdapter.submitList(sharedPreferences.getUriList())
 
 
-
-
+        // 도움말 버튼 클릭 시
+        binding.helpCreateTaleBtn.setOnClickListener {
+            AlertDialogManager.instance.simpleAlertDialog(getString(R.string.help_create_tale),this,null)
+        }
         // 이미지 불러오기 버튼 눌렀을 때
         binding.getImageBtn.setOnClickListener {
             pickImage.launch(arrayOf("image/*"))
