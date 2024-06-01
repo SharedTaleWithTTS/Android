@@ -1,7 +1,6 @@
 package com.example.sharedtalewithttsapp.utils
 
 import android.util.Log
-import firebase.com.protolitewrapper.BuildConfig
 
 object Constants {
     const val TAG: String = "로그"

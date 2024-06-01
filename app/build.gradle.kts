@@ -79,6 +79,9 @@ dependencies {
     implementation ("androidx.drawerlayout:drawerlayout:1.2.0")
     // 구글 EXO 라이브러리 (오디오 and 비디오)
     implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-core:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-dash:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-ui:2.19.1")
 
 
 }

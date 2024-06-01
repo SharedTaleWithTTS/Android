@@ -82,16 +82,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        binding.textBtn.setOnClickListener {
-            val intent: Intent = Intent(this, CreateTaleActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.test2Btn.setOnClickListener {
-            val intent: Intent = Intent(this, MyTaleListActivity::class.java)
-            startActivity(intent)
-        }
-
     }// onCreate 코드 끝
 
     override fun onStop() {

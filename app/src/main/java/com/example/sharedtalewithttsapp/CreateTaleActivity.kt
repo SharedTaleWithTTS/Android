@@ -82,7 +82,7 @@ class CreateTaleActivity : AppCompatActivity() {
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
                 } catch (e: SecurityException) {
-                    Log.d(TAG, "권한 요청 실패 : ${e}");
+                    Log.e(TAG, "권한 요청 실패 : ${e}");
                 }
                 newList.add(uri)
             }
@@ -101,7 +101,7 @@ class CreateTaleActivity : AppCompatActivity() {
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
                 } catch (e: SecurityException) {
-                    Log.d(TAG, "권한 요청 실패 : ${e}");
+                    Log.e(TAG, "권한 요청 실패 : ${e}");
                 }
                 val audioTitle = getAudioTitle(uri)
                 newList.add(PickVoiceListModel(audioTitle, uri))
