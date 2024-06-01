@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     HTTP_RESPONSE_STATE.FAIL -> {
                         Log.d(TAG, "로그인 api 호출 실패 : ${loginResponse}");
-                        AlertDialogManager.instance.simpleAlertDialog("네트워크 오류..!", this, null)
+                        AlertDialogManager.instance.simpleAlertDialog("네트워크 오류...!", this, null)
                     }
                 }
             })
